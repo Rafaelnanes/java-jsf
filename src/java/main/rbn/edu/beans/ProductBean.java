@@ -7,7 +7,7 @@ import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import rbn.edu.entity.Product;
+import rbn.edu.model.Product;
 import rbn.edu.service.ProductService;
 
 @Component
@@ -20,15 +20,8 @@ public class ProductBean {
     private ProductService productService;
 
     public void addProduct() {
-	boolean success = productService.add(product);
-
-	FacesMessage msg;
-
-	if (success)
-	    msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Product added", "success");
-	else
-	    msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "error in adding product", "failure");
-
+	productService.add(product);
+	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Product added", "success");
 	FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 

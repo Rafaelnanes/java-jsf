@@ -13,46 +13,47 @@ import rbn.edu.model.User;
 import rbn.edu.service.IUserService;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
-	@Autowired
-	private IUserDAO userDAO;
-	
-	public boolean isUserLogged() {
-		String login = null;
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		try {
-			login = (String) authentication.getPrincipal();
-		} catch (ClassCastException e) {
-			login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
-		}
-		return login.equals("anonymousUser") ? false : true;
-	}
+    @Autowired
+    private IUserDAO userDAO;
 
-	@Override
-	public User add(User t) {
-		return userDAO.add(t);
+    @Override
+    public boolean isUserLogged() {
+	String login = null;
+	SecurityContext context = SecurityContextHolder.getContext();
+	Authentication authentication = context.getAuthentication();
+	try {
+	    login = (String) authentication.getPrincipal();
+	} catch (ClassCastException e) {
+	    login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
 	}
+	return login.equals("anonymousUser") ? false : true;
+    }
 
-	@Override
-	public User update(User t) {
-		return userDAO.update(t);
-	}
+    @Override
+    public User add(User t) {
+	return userDAO.add(t);
+    }
 
-	@Override
-	public List<User> getAll() {
-		return userDAO.getAll();
-	}
+    @Override
+    public User update(User t) {
+	return userDAO.update(t);
+    }
 
-	@Override
-	public User getById(long id) {
-		return userDAO.getById(id);
-	}
+    @Override
+    public List<User> getAll() {
+	return userDAO.getAll();
+    }
 
-	@Override
-	public void remove(long id) {
-		userDAO.remove(id);
-	}
+    @Override
+    public User getById(long id) {
+	return userDAO.getById(id);
+    }
+
+    @Override
+    public void remove(long id) {
+	userDAO.remove(id);
+    }
 
 }

@@ -27,71 +27,71 @@ import rbn.edu.model.UserLevel;
 @Service("userDetailsService")
 public class AuthenticationUserService implements UserDetailsService {
 
-	@Autowired
-	private IUserDAO userDAO;
-	@Autowired
-	private IUserLevelDAO userLevelDAO;
+    @Autowired
+    private IUserDAO userDAO;
+    @Autowired
+    private IUserLevelDAO userLevelDAO;
 
-	public boolean isUsuarioLogado() {
-		String login = null;
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authentication = context.getAuthentication();
-		try {
-			login = (String) authentication.getPrincipal();
-		} catch (ClassCastException e) {
-			login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
-		}
-		return login.equals("anonymousUser") ? false : true;
+    public boolean isUsuarioLogado() {
+	String login = null;
+	SecurityContext context = SecurityContextHolder.getContext();
+	Authentication authentication = context.getAuthentication();
+	try {
+	    login = (String) authentication.getPrincipal();
+	} catch (ClassCastException e) {
+	    login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+	}
+	return login.equals("anonymousUser") ? false : true;
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+
+	User appUser = userDAO.findUserByLogin(login);
+	if (appUser == null && login.equals("adm")) {
+	    addAdmUser();
+	    appUser = userDAO.findUserByLogin(login);
 	}
 
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+	List<GrantedAuthority> authorities = buildUserAuthority(appUser.getUserLevels());
 
-		User appUser = userDAO.findUserByLogin(login);
-		if (appUser == null && login.equals("adm")) {
-			addAdmUser();
-			appUser = userDAO.findUserByLogin(login);
-		}
+	return buildUserForAuthentication(appUser, authorities);
+    }
 
-		List<GrantedAuthority> authorities = buildUserAuthority(appUser.getUserLevels());
+    private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user,
+	    List<GrantedAuthority> authorities) {
+	return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(),
+		user.isEnabled(), true, true, true, authorities);
+    }
 
-		return buildUserForAuthentication(appUser, authorities);
+    private List<GrantedAuthority> buildUserAuthority(Set<UserLevel> usuarioNiveis) {
+
+	Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+
+	// Build user's authorities
+	for (UserLevel usuarioNivel : usuarioNiveis) {
+	    setAuths.add(new SimpleGrantedAuthority(usuarioNivel.getAuthority()));
 	}
 
-	private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user,
-			List<GrantedAuthority> authorities) {
-		return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(),
-				user.isEnabled(), true, true, true, authorities);
+	List<GrantedAuthority> lista = new ArrayList<GrantedAuthority>(setAuths);
+
+	return lista;
+    }
+
+    @Transactional
+    public void addAdmUser() {
+	User user = new User();
+	user.setEnabled(true);
+	user.setLogin("adm");
+	user.setPassword(new BCryptPasswordEncoder().encode("adm"));
+
+	userDAO.add(user);
+
+	for (UserAuthorizationType auth : UserAuthorizationType.getValues()) {
+	    userLevelDAO.add(new UserLevel(auth, user));
 	}
 
-	private List<GrantedAuthority> buildUserAuthority(Set<UserLevel> usuarioNiveis) {
-
-		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-
-		// Build user's authorities
-		for (UserLevel usuarioNivel : usuarioNiveis) {
-			setAuths.add(new SimpleGrantedAuthority(usuarioNivel.getAuthority()));
-		}
-
-		List<GrantedAuthority> lista = new ArrayList<GrantedAuthority>(setAuths);
-
-		return lista;
-	}
-
-	@Transactional
-	public void addAdmUser() {
-		User user = new User();
-		user.setEnabled(true);
-		user.setLogin("adm");
-		user.setPassword(new BCryptPasswordEncoder().encode("adm"));
-
-		userDAO.add(user);
-
-		for (UserAuthorizationType auth : UserAuthorizationType.getValues()) {
-			userLevelDAO.add(new UserLevel(auth, user));
-		}
-
-	}
+    }
 
 }

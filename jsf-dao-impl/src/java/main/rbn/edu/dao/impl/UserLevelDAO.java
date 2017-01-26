@@ -10,9 +10,9 @@ import rbn.edu.model.UserLevel;
 @Transactional
 public class UserLevelDAO extends GenericDAO<UserLevel> implements IUserLevelDAO {
 
-	@Override
-	protected Class<UserLevel> getPersistenceClass() {
-		return UserLevel.class;
-	}
+    @Override
+    protected Class<UserLevel> getPersistenceClass() {
+	return UserLevel.class;
+    }
 
 }

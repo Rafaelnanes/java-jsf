@@ -10,9 +10,9 @@ import rbn.edu.model.Product;
 @Transactional
 public class ProductDAO extends GenericDAO<Product> implements IProductDAO {
 
-	@Override
-	protected Class<Product> getPersistenceClass() {
-		return Product.class;
-	}
+    @Override
+    protected Class<Product> getPersistenceClass() {
+	return Product.class;
+    }
 
 }

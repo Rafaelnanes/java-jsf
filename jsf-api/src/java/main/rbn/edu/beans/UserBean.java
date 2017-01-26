@@ -8,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import rbn.edu.service.UserService;
+import rbn.edu.service.IUserService;
 
 @Component
 @ManagedBean
@@ -18,13 +18,13 @@ public class UserBean implements Serializable {
     private static final long serialVersionUID = -4387896804545360897L;
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
-    public boolean isAutorizado() {
+    public boolean isAuthorized() {
 	return true;
     }
 
-    public boolean isUsuarioLogado() {
+    public boolean isUserLogged() {
 	return userService.isUserLogged();
     }
 

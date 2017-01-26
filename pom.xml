@@ -1,20 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>jsf-project</groupId>
-  <artifactId>jsf-project</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-  <modules>
-  	<module>jsf-api</module>
-  </modules>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>jsf-project</groupId>
+	<artifactId>jsf-project</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>jsf-api</module>
+		<module>jsf-model</module>
+		<module>jsf-service</module>
+		<module>jsf-service-impl</module>
+		<module>jsf-dao</module>
+		<module>jsf-dao-impl</module>
+	</modules>
+
+	<properties>
 		<jsf-version>2.2.11</jsf-version>
 		<spring-version>4.3.5.RELEASE</spring-version>
 		<spring-security-version>4.2.1.RELEASE</spring-security-version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
 		<mysql.connector.version>5.1.31</mysql.connector.version>
+		<jsf-service-impl-sufix>impl</jsf-service-impl-sufix>
+		<jsf-dao-impl-sufix>impl</jsf-dao-impl-sufix>
 	</properties>
 
 	<dependencies>
@@ -132,5 +140,18 @@
 		</dependency>
 
 	</dependencies>
-  
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

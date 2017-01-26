@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+	<p:growl id="messages" />
+	<h:form id="barraDeFerramentas">
+		<p:menubar>
+			<p:submenu label="Product">
+				<p:menuitem value="Add" url="#" />
+				<p:menuitem value="List" url="#" />
+			</p:submenu>
+		</p:menubar>
+		<p:menubar >
+			<p:submenu label="User">
+				<p:menuitem value="Logout" url="#" rendered="#{userBean.usuarioLogado}" />
+				<p:menuitem value="Login" url="#" rendered="#{!userBean.usuarioLogado}" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+</ui:composition>
+</html>

@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/layout-padrao.xhtml">
+
+	<ui:define name="conteudo">
+		<h:outputText value="Usuário ou senha incorretos!"
+			rendered="#{param.erro}" style="color: darkred" />
+		<div align="left">
+			<form action="${request.contextPath}/appLogin" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+				<p:panelGrid columns="2">
+					<h:outputLabel for="j_username" value="Username: *" />
+					<h:inputText id="j_username" required="true" />
+					<h:outputLabel for="j_password" value="Password: * " />
+					<h:inputSecret id="j_password" required="true" />
+					<h:commandButton value="Login" style="text-align: center" />
+				</p:panelGrid>
+			</form>
+		</div>
+	</ui:define>
+</ui:composition>

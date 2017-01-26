@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class GenericDAO<T> {
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     protected Session getSession() {
 	Session session = null;

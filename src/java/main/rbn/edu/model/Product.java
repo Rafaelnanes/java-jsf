@@ -8,14 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "product")
+@Table(name = "pro_product")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "pro_id")
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "pro_name", nullable = false)
     private String name;
 
     public long getId() {

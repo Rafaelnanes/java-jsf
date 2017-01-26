@@ -4,10 +4,14 @@ import javax.servlet.Filter;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+import rbn.edu.security.WebSecurityConfig;
+
+public class ApplicationInitializer
+
+	extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-	return new Class<?>[] { ApplicationConfig.class, HibernateConfig.class };
+	return new Class<?>[] { ApplicationConfig.class, HibernateConfig.class, WebSecurityConfig.class };
     }
 
     @Override

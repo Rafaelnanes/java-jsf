@@ -25,7 +25,7 @@ public class UserBean implements Serializable {
     }
 
     public boolean isUsuarioLogado() {
-	return userService.isUsuarioLogado();
+	return userService.isUserLogged();
     }
 
 }

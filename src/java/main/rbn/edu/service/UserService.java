@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    public boolean isUsuarioLogado() {
+    public boolean isUserLogged() {
 	String login = null;
 	SecurityContext context = SecurityContextHolder.getContext();
 	Authentication authentication = context.getAuthentication();
@@ -20,4 +20,5 @@ public class UserService {
 	}
 	return login.equals("anonymousUser") ? false : true;
     }
+
 }

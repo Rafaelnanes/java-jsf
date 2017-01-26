@@ -18,13 +18,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     @Qualifier("userDetailsService")
-    UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-	http.authorizeRequests().antMatchers("/secure/**").access("hasRole('ROLE_ADMIN')").and().formLogin()
+	http.authorizeRequests().antMatchers("/app/**").access("hasRole('ROLE_ADMIN')").and().formLogin()
 		.loginPage("/login.xhtml").loginProcessingUrl("/appLogin").usernameParameter("j_username")
-		.passwordParameter("j_password").defaultSuccessUrl("/main.xhtml").and().logout()
+		.passwordParameter("j_password").defaultSuccessUrl("/app/product/productAdd.xhtml").and().logout()
 		.logoutUrl("/index.xhtml").logoutSuccessUrl("/login.xhtml");
     }
 

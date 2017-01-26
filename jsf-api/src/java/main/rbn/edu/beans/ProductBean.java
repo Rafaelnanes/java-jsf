@@ -1,6 +1,7 @@
 package rbn.edu.beans;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -11,6 +12,7 @@ import rbn.edu.model.Product;
 import rbn.edu.service.IProductService;
 
 @Component
+@ManagedBean
 @RequestScoped
 public class ProductBean {
 

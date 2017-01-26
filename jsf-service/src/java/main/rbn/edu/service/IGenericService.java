@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface IGenericService<T> {
 
-	T add(T t);
+    T add(T t);
 
-	T update(T t);
+    T update(T t);
 
-	List<T> getAll();
+    List<T> getAll();
 
-	T getById(long id);
+    T getById(long id);
 
-	void remove(long id);
+    void remove(long id);
 
 }

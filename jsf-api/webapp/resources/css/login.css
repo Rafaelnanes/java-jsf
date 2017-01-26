@@ -1,0 +1,53 @@
+ @charset "utf-8";
+ /* CSS Document */
+ 
+body{ 
+	
+	background-image:url("../images/educacao.jpg");
+	background-repeat:no-repeat;
+	list-style:none;
+	font:0px Trebuchet MS, arial, verdana, helvetica, sans-serif; 
+	color:#3c5a9a; 
+	
+}
+	
+form{
+	position: absolute;
+	left: 38%;
+	top: 38%;
+	padding:50px; 
+	margin:5px;
+	background-color: #fffffe;
+	border-radius: 15px;
+	box-shadow: #B5B6B8 5px 2px 1px;
+	
+}
+	
+label{
+	font:16px arial, verdana, helvetica, sans-serif;
+	
+}
+
+input{
+	font:16px Trebuchet MS, arial, verdana, helvetica, sans-serif;
+	left: 5%;
+	top: 5%;
+	padding:0px; 
+	margin:2px;
+}
+.ui-button-text  {
+	font:15px Trebuchet MS, arial, verdana, helvetica, sans-serif;
+	color:#003673;
+	background-color: #ffffff;
+	position:center;
+}
+
+button{
+	right: -250%;
+	
+}
+
+td{
+	
+	
+}

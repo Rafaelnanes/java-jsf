@@ -4,15 +4,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-	<p:growl id="messages" />
 	<h:form id="barraDeFerramentas">
+		<p:growl id="messages" />
 		<p:menubar>
 			<p:submenu label="Product">
 				<p:menuitem value="Add" url="#" />
 				<p:menuitem value="List" url="#" />
 			</p:submenu>
-		</p:menubar>
-		<p:menubar >
 			<p:submenu label="User">
 				<p:menuitem value="Logout" url="#" rendered="#{userBean.userLogged}" />
 				<p:menuitem value="Login" url="#" rendered="#{!userBean.userLogged}" />

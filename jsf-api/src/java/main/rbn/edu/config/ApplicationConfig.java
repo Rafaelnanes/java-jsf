@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "rbn.edu.config", "rbn.edu.beans", "rbn.edu.security" })
+@ComponentScan(basePackages = { "rbn.edu.config", "rbn.edu.beans" })
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
 
 }

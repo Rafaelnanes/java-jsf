@@ -6,9 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import rbn.edu.security.WebSecurityConfig;
 
-public class ApplicationInitializer
-
-	extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
 	return new Class<?>[] { ApplicationConfig.class, HibernateConfig.class, WebSecurityConfig.class };

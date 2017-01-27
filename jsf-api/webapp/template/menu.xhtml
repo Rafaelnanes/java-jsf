@@ -12,7 +12,7 @@
 				<p:menuitem value="List" url="/app/product/productList.xhtml" />
 			</p:submenu>
 			<p:submenu label="User">
-				<p:menuitem value="Logout" url="#" rendered="#{userBean.userLogged}" />
+				<p:menuitem value="Logout" url="#{userBean.logout}" rendered="#{userBean.userLogged}" />
 				<p:menuitem value="Login" url="/login.xhtml" rendered="#{!userBean.userLogged}" />
 			</p:submenu>
 		</p:menubar>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,11 @@ public class UserBean implements Serializable {
 
     public boolean isUserLogged() {
 	return userService.isUserLogged();
+    }
+
+    public String getLogout() {
+	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	return "/login.xhtml";
     }
 
 }

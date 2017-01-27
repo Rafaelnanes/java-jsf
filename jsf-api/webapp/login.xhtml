@@ -10,7 +10,6 @@
 			rendered="#{param.erro}" style="color: darkred" />
 		<div align="left">
 			<form action="${request.contextPath}/appLogin" method="post">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
 				<p:panelGrid columns="2">
 					<h:outputLabel for="j_username" value="Username: *" />
 					<h:inputText id="j_username" required="true" />

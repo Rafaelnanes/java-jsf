@@ -23,7 +23,7 @@ public class UserBean implements Serializable {
 	return userService.isUserLogged();
     }
 
-    public String getLogout() {
+    public String logout() {
 	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	return "/login.xhtml";
     }

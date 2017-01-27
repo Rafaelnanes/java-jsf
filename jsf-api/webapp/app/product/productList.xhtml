@@ -21,11 +21,16 @@
 				</p:column>
 
 				<p:column>
-					<p:commandButton value="Remove" actionListener="#{productListBean.remove}" update=":productFormList:productList">
+					<p:commandLink value="[Remove]" actionListener="#{productListBean.remove}" update=":productFormList:productList">
 						<f:param name="id" value="#{p.id}" />
 						<p:confirm header="Confirmation" message="Are you sure to remove?"
 							icon="ui-icon-alert" />
-					</p:commandButton>
+					</p:commandLink>
+				</p:column>
+				<p:column>
+					<p:commandLink value="[Update]" action="#{productMainBean.redirectToUpdate}" >
+						<f:param name="id" value="#{p.id}" />
+					</p:commandLink>
 				</p:column>
 			</p:dataTable>
 

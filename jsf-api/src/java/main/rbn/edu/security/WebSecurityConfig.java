@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/app/**").access("hasRole('ROLE_ADMIN')")//
 		.and().formLogin().loginPage("/login.xhtml").loginProcessingUrl("/appLogin")
 		.usernameParameter("j_username").passwordParameter("j_password")
-		.defaultSuccessUrl("/app/product/productAdd.xhtml").and().logout().logoutUrl("/index.xhtml")
+		.defaultSuccessUrl("/app/product/productMain.xhtml").and().logout().logoutUrl("/index.xhtml")
 		.logoutSuccessUrl("/login.xhtml")//
 		.and().csrf().disable();
     }

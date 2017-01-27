@@ -2,7 +2,6 @@ package rbn.edu.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 import rbn.edu.service.IUserService;
 
 @Component
-@ManagedBean
 @SessionScoped
 public class UserBean implements Serializable {
 
@@ -20,10 +18,6 @@ public class UserBean implements Serializable {
 
     @Autowired
     private IUserService userService;
-
-    public boolean isAuthorized() {
-	return true;
-    }
 
     public boolean isUserLogged() {
 	return userService.isUserLogged();

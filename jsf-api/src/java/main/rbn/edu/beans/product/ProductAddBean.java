@@ -1,7 +1,7 @@
-package rbn.edu.beans;
+package rbn.edu.beans.product;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
+import java.io.IOException;
+
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -10,22 +10,16 @@ import org.springframework.stereotype.Component;
 
 import rbn.edu.model.Product;
 import rbn.edu.service.IProductService;
+import rbn.edu.util.UtilJSF;
 
 @Component
-@ManagedBean
 @RequestScoped
-public class ProductBean {
+public class ProductAddBean {
 
     @Autowired
-    private IProductService productService;
+    protected IProductService productService;
 
     private Product product = new Product();
-
-    public void addProduct() {
-	productService.add(product);
-	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Product added", "success");
-	FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
 
     public Product getProduct() {
 	return product;
@@ -33,6 +27,17 @@ public class ProductBean {
 
     public void setProduct(Product product) {
 	this.product = product;
+    }
+
+    public ProductAddBean() {
+	this.product = new Product();
+    }
+
+    public void addProduct() throws IOException {
+	productService.add(product);
+	// product = new Product();
+	UtilJSF.FaceMessage("Product added");
+	FacesContext.getCurrentInstance().getExternalContext().redirect("productList.xhtml");
     }
 
 }

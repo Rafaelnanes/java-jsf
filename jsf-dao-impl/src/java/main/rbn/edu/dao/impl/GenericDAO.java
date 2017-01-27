@@ -49,10 +49,10 @@ public abstract class GenericDAO<T> {
 	return (T) criteria.uniqueResult();
     }
 
+    @SuppressWarnings("unchecked")
     public void remove(long id) {
 	Criteria criteria = getSession().createCriteria(getPersistenceClass());
 	criteria.add(Restrictions.eq("id", id));
-	@SuppressWarnings("unchecked")
 	T prod = (T) criteria.uniqueResult();
 	getSession().delete(prod);
     }

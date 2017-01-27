@@ -1,14 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/layout-padrao.xhtml">
+	<ui:define name="conteudo">
 
-<h:head>
-	<title>JSF Project</title>
-</h:head>
-<h:body>
-	<h3>Main</h3>
-</h:body>
-</html>
+		<h:form id="productFormList">
+
+			<p:growl id="message" showDetail="true" />
+
+			<p:dataTable id="productList" var="p" value="#{productListBean.products}"
+				paginator="true" rows="5">
+				<p:column headerText="Id">
+					<h:outputText value="#{p.id}" />
+				</p:column>
+
+				<p:column headerText="Name">
+					<h:outputText value="#{p.name}" />
+				</p:column>
+
+				<p:column>
+					<p:commandButton value="Remove" actionListener="#{productListBean.remove}" update=":productFormList:productList">
+						<f:param name="id" value="#{p.id}" />
+						<p:confirm header="Confirmation" message="Are you sure to remove?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Yes" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

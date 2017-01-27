@@ -8,9 +8,9 @@
 		<h:form>
 			<p:growl id="messages" sticky="true" />
 			<p:panelGrid columns="2" bgcolor="gray">
-				<h:outputLabel value="Login: "></h:outputLabel>
-				<p:inputText value="#{productBean.product.name}" required="true" />
-				<h:commandButton value="Cadastrar" action="#{productBean.addProduct}" />
+				<h:outputLabel value="Name: "></h:outputLabel>
+				<p:inputText value="#{productAddBean.product.name}" required="true" />
+				<h:commandButton value="Cadastrar" action="#{productAddBean.addProduct}" />
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

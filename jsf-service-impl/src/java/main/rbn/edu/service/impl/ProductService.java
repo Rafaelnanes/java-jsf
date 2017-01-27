@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import rbn.edu.dao.IProductDAO;
 import rbn.edu.model.Product;
@@ -16,6 +17,7 @@ public class ProductService implements IProductService {
     private IProductDAO productDAO;
 
     @Override
+    @Transactional
     public Product add(Product t) {
 	return productDAO.add(t);
     }
@@ -36,6 +38,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Transactional
     public void remove(long id) {
 	productDAO.remove(id);
     }

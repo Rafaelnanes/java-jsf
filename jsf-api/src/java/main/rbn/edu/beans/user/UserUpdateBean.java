@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
-import rbn.edu.model.User;
+import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.UserLevel;
 import rbn.edu.util.UtilJSF;
 
@@ -25,12 +25,15 @@ public class UserUpdateBean extends AbstractUserBean {
     }
 
     public void update() {
-	Set<UserLevel> level = new HashSet<UserLevel>();
-	level.add(new UserLevel(authorizationType, user));
-	user.setUserLevels(level);
-	userService.update(user);
-	user = new User();
-	UtilJSF.FaceMessage("User updated");
+	try {
+	    Set<UserLevel> level = new HashSet<UserLevel>();
+	    level.add(new UserLevel(authorizationType, user));
+	    user.setUserLevels(level);
+	    userService.update(user);
+	    UtilJSF.FaceMessage("User updated");
+	} catch (BusinessException e) {
+	    UtilJSF.FaceMessage(e.getMessage());
+	}
     }
 
 }

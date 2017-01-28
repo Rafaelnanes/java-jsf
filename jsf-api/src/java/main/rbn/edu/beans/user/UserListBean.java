@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import rbn.edu.beans.AbstractBean;
+import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.User;
 import rbn.edu.service.IUserService;
 import rbn.edu.util.UtilJSF;
@@ -34,9 +35,13 @@ public class UserListBean extends AbstractBean {
     }
 
     public void remove() {
-	Long id = Long.valueOf(UtilJSF.getParameters().get("id"));
-	userService.remove(id);
-	UtilJSF.FaceMessage("User removed");
+	try {
+	    Long id = Long.valueOf(UtilJSF.getParameters().get("id"));
+	    userService.remove(id);
+	    UtilJSF.FaceMessage("User removed");
+	} catch (BusinessException e) {
+	    UtilJSF.FaceMessage(e.getMessage());
+	}
     }
 
     public String redirectToInfo() throws IOException {

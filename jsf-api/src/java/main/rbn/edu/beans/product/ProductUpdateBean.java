@@ -3,6 +3,7 @@ package rbn.edu.beans.product;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import rbn.edu.exceptions.BusinessException;
 import rbn.edu.util.UtilJSF;
 
 @ManagedBean
@@ -19,8 +20,12 @@ public class ProductUpdateBean extends AbstractProductBean {
     }
 
     public void update() {
-	productService.update(product);
-	UtilJSF.FaceMessage("Product updated");
+	try {
+	    productService.update(product);
+	    UtilJSF.FaceMessage("Product updated");
+	} catch (BusinessException e) {
+	    UtilJSF.FaceMessage(e.getMessage());
+	}
     }
 
 }

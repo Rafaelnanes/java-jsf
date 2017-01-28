@@ -24,15 +24,12 @@ public abstract class GenericDAO<T> {
 	return session;
     }
 
-    public T add(T obj) {
+    public void add(T obj) {
 	getSession().save(obj);
-	getSession().refresh(obj);
-	return obj;
     }
 
-    public T update(T obj) {
+    public void update(T obj) {
 	getSession().merge(obj);
-	return obj;
     }
 
     @SuppressWarnings("unchecked")

@@ -13,6 +13,7 @@
 		<module>jsf-service-impl</module>
 		<module>jsf-dao</module>
 		<module>jsf-dao-impl</module>
+		<module>jsf-config</module>
 	</modules>
 
 	<properties>

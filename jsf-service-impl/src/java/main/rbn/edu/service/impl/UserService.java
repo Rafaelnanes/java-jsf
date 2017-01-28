@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import rbn.edu.dao.IUserDAO;
 import rbn.edu.dao.IUserLevelDAO;
+import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.User;
 import rbn.edu.model.UserLevel;
 import rbn.edu.service.IUserService;
@@ -42,31 +43,30 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public User add(User t) {
+    public void add(User t) throws BusinessException {
 	t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
 	Set<UserLevel> userLevels = t.getUserLevels();
-	User user = userDAO.add(t);
+	userDAO.add(t);
 	for (UserLevel level : userLevels) {
 	    userLevelDAO.add(level);
 	}
-	return user;
     }
 
     @Override
     @Transactional
-    public User update(User t) {
+    public void update(User t) throws BusinessException {
+	t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
 	removeAllUserLevelsByUserId(t.getId());
 	Set<UserLevel> userLevels = t.getUserLevels();
-	User user = updateTransactional(t);
+	updateTransactional(t);
 	for (UserLevel level : userLevels) {
 	    userLevelDAO.add(level);
 	}
-	return user;
     }
 
     @Transactional
-    private User updateTransactional(User t) {
-	return userDAO.update(t);
+    private void updateTransactional(User t) {
+	userDAO.update(t);
     }
 
     @Transactional
@@ -88,7 +88,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public void remove(long id) {
+    public void remove(long id) throws BusinessException {
 	removeAllUserLevelsByUserId(id);
 	userDAO.remove(id);
     }

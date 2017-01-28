@@ -10,26 +10,37 @@
 	</parent>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>jsf-project</groupId>
+			<artifactId>jsf-config</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>jsf-project</groupId>
 			<artifactId>jsf-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>jsf-project</groupId>
 			<artifactId>jsf-service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>jsf-project</groupId>
 			<artifactId>jsf-dao</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>jsf-project</groupId>
 			<artifactId>jsf-dao-${jsf-dao-impl-sufix}</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
 	</dependencies>
 
 	<build>

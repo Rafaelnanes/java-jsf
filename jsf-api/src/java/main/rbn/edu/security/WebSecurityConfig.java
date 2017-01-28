@@ -23,11 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 	http.authorizeRequests()//
-		.antMatchers("/app/**").access("hasRole('ROLE_ADMIN')")//
+
+		.antMatchers("/app/user/**").access("hasRole('ROLE_ADMIN')")//
+		.antMatchers("/app/product/**").access("hasRole('ROLE_ADMIN')")//
+		.antMatchers("/app/customer/**").access("hasRole('ROLE_CUSTOMER')")//
+		.and().exceptionHandling().accessDeniedPage("/403.xhtml")
+
 		.and().formLogin().loginPage("/login.xhtml").loginProcessingUrl("/appLogin")
-		.usernameParameter("j_username").passwordParameter("j_password")
-		.defaultSuccessUrl("/app/product/productList.xhtml").and().logout().logoutUrl("/index.xhtml")
-		.logoutSuccessUrl("/login.xhtml")//
+		.usernameParameter("j_username").passwordParameter("j_password").defaultSuccessUrl("/index.xhtml")//
+		.and().logout().logoutUrl("/logout.xhtml").logoutSuccessUrl("/login.xhtml")//
+
 		.and().csrf().disable();
     }
 

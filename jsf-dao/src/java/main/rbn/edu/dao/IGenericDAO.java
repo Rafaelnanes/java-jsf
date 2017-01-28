@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface IGenericDAO<T> {
 
-    T add(T obj);
+    void add(T obj);
 
-    T update(T obj);
+    void update(T obj);
 
     List<T> getAll();
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rbn.edu.dao.IProductDAO;
+import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.Product;
 import rbn.edu.service.IProductService;
 
@@ -18,14 +19,18 @@ public class ProductService implements IProductService {
 
     @Override
     @Transactional
-    public Product add(Product t) {
-	return productDAO.add(t);
+    public void add(Product t) throws BusinessException {
+	try {
+	    productDAO.add(t);
+	} catch (Exception e) {
+	    new BusinessException(e.getMessage());
+	}
     }
 
     @Override
     @Transactional
-    public Product update(Product t) {
-	return productDAO.update(t);
+    public void update(Product t) throws BusinessException {
+	productDAO.update(t);
     }
 
     @Override
@@ -42,7 +47,7 @@ public class ProductService implements IProductService {
 
     @Override
     @Transactional
-    public void remove(long id) {
+    public void remove(long id) throws BusinessException {
 	productDAO.remove(id);
     }
 

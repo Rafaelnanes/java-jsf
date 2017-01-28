@@ -5,49 +5,53 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
+		<p:panel header="Product List" style="margin-bottom:20px">
+			<h:form id="productFormList">
 
-		<h:form id="productFormList">
+				<p:growl id="message" showDetail="true" />
 
-			<p:growl id="message" showDetail="true" />
+				<p:dataTable id="productList" var="p"
+					value="#{productListBean.products}" paginator="true" rows="5">
+					<p:column headerText="Id">
+						<h:outputText value="#{p.id}" />
+					</p:column>
 
-			<p:dataTable id="productList" var="p" value="#{productListBean.products}"
-				paginator="true" rows="5">
-				<p:column headerText="Id">
-					<h:outputText value="#{p.id}" />
-				</p:column>
+					<p:column headerText="Name">
+						<h:outputText value="#{p.name}" />
+					</p:column>
 
-				<p:column headerText="Name">
-					<h:outputText value="#{p.name}" />
-				</p:column>
+					<p:column>
+						<p:commandLink value="[Remove]"
+							actionListener="#{productListBean.remove}"
+							update=":productFormList:productList">
+							<f:param name="id" value="#{p.id}" />
+							<p:confirm header="Confirmation"
+								message="Are you sure to remove?" icon="ui-icon-alert" />
+						</p:commandLink>
+					</p:column>
 
-				<p:column>
-					<p:commandLink value="[Remove]" actionListener="#{productListBean.remove}" update=":productFormList:productList">
-						<f:param name="id" value="#{p.id}" />
-						<p:confirm header="Confirmation" message="Are you sure to remove?"
-							icon="ui-icon-alert" />
-					</p:commandLink>
-				</p:column>
-				
-				<p:column>
-					<h:link value="[Update]" outcome="productUpdate.xhtml" >
-						<f:param name="id" value="#{p.id}" />
-					</h:link>
-				</p:column>
-				
-				<p:column>
-					<h:link value="[Info]" outcome="productInfo.xhtml" >
-						<f:param name="id" value="#{p.id}" />
-					</h:link>
-				</p:column>
-			</p:dataTable>
+					<p:column>
+						<h:link value="[Update]" outcome="productUpdate.xhtml">
+							<f:param name="id" value="#{p.id}" />
+						</h:link>
+					</p:column>
 
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-				<p:commandButton value="Yes" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="No" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
+					<p:column>
+						<h:link value="[Info]" outcome="productInfo.xhtml">
+							<f:param name="id" value="#{p.id}" />
+						</h:link>
+					</p:column>
+				</p:dataTable>
 
-		</h:form>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+
+			</h:form>
+
+		</p:panel>
 	</ui:define>
 </ui:composition>

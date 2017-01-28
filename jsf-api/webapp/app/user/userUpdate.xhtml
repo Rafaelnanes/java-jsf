@@ -5,35 +5,37 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<p:growl id="messages" showDetail="true" />
-			<h:inputHidden value="#{userUpdateBean.user.id}" />
-			<p:panelGrid columns="2" bgcolor="gray">
+		<p:panel header="User Update" style="margin-bottom:20px">
+			<h:form>
+				<p:growl id="messages" showDetail="true" />
+				<h:inputHidden value="#{userUpdateBean.user.id}" />
+				<p:panelGrid columns="2" bgcolor="gray">
 
-				<h:outputLabel value="Login: " />
-				<p:inputText value="#{userUpdateBean.user.login}" required="true"
-					requiredMessage="#{msg['user.login.required']}" />
+					<h:outputLabel value="Login: " />
+					<p:inputText value="#{userUpdateBean.user.login}" required="true"
+						requiredMessage="#{msg['user.login.required']}" />
 
-				<h:outputLabel value="Password: " />
-				<p:password value="#{userUpdateBean.user.password}" required="true"
-					requiredMessage="#{msg['user.password.required']}" />
+					<h:outputLabel value="Password: " />
+					<p:password value="#{userUpdateBean.user.password}" required="true"
+						requiredMessage="#{msg['user.password.required']}" />
 
-				<h:outputLabel value="Enabled: " />
-				<p:selectOneMenu value="#{userUpdateBean.user.enabled}"
-					required="true">
-					<f:selectItem itemValue="true" itemLabel="Yes" />
-					<f:selectItem itemValue="false" itemLabel="No" />
-				</p:selectOneMenu>
+					<h:outputLabel value="Enabled: " />
+					<p:selectOneMenu value="#{userUpdateBean.user.enabled}"
+						required="true">
+						<f:selectItem itemValue="true" itemLabel="Yes" />
+						<f:selectItem itemValue="false" itemLabel="No" />
+					</p:selectOneMenu>
 
-				<h:outputLabel value="User Levels: " />
-				<p:selectOneMenu value="#{userUpdateBean.authorizationType}">
-					<f:selectItems value="#{userUpdateBean.authorizations}" var="p"
-						itemLabel="#{p}" itemValue="#{p}" />
-				</p:selectOneMenu>
+					<h:outputLabel value="User Levels: " />
+					<p:selectOneMenu value="#{userUpdateBean.authorizationType}">
+						<f:selectItems value="#{userUpdateBean.authorizations}" var="p"
+							itemLabel="#{p}" itemValue="#{p}" />
+					</p:selectOneMenu>
 
-				<h:commandButton value="Update"
-					actionListener="#{userUpdateBean.update}" />
-			</p:panelGrid>
-		</h:form>
+					<h:commandButton value="Update"
+						actionListener="#{userUpdateBean.update}" />
+				</p:panelGrid>
+			</h:form>
+		</p:panel>
 	</ui:define>
 </ui:composition>

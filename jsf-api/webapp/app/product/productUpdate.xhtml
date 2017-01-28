@@ -5,30 +5,32 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<p:growl id="messages" showDetail="true" />
-			<h:inputHidden value="#{productUpdateBean.product.id}" />
-			<p:panelGrid columns="2" bgcolor="gray">
+		<p:panel header="Product Update" style="margin-bottom:20px">
+			<h:form>
+				<p:growl id="messages" showDetail="true" />
+				<h:inputHidden value="#{productUpdateBean.product.id}" />
+				<p:panelGrid columns="2" bgcolor="gray">
 
-				<h:outputLabel value="Name: " />
-				<p:inputText value="#{productUpdateBean.product.name}"
-					required="true" requiredMessage="#{msg['product.name.required']}" />
+					<h:outputLabel value="Name: " />
+					<p:inputText value="#{productUpdateBean.product.name}"
+						required="true" requiredMessage="#{msg['product.name.required']}" />
 
-				<h:outputLabel value="Value: " />
-				<p:inputText value="#{productUpdateBean.product.value}"
-					required="true" requiredMessage="#{msg['product.value.required']}"
-					validator="rbn.edu.validators.ProductValueValidator" />
+					<h:outputLabel value="Value: " />
+					<p:inputText value="#{productUpdateBean.product.value}"
+						required="true" requiredMessage="#{msg['product.value.required']}"
+						validator="rbn.edu.validators.ProductValueValidator" />
 
-				<h:outputLabel value="Type:" />
-				<p:selectOneMenu value="#{productUpdateBean.product.productType}"
-					required="true">
-					<f:selectItems value="#{productUpdateBean.productTypes}" />
-				</p:selectOneMenu>
+					<h:outputLabel value="Type:" />
+					<p:selectOneMenu value="#{productUpdateBean.product.productType}"
+						required="true">
+						<f:selectItems value="#{productUpdateBean.productTypes}" />
+					</p:selectOneMenu>
 
-				<h:commandButton value="Update"
-					actionListener="#{productUpdateBean.update}" />
+					<h:commandButton value="Update"
+						actionListener="#{productUpdateBean.update}" />
 
-			</p:panelGrid>
-		</h:form>
+				</p:panelGrid>
+			</h:form>
+		</p:panel>
 	</ui:define>
 </ui:composition>

@@ -6,7 +6,7 @@
 	template="/template/layout-padrao.xhtml">
 
 	<ui:define name="conteudo">
-		<h:outputText value="Usuário ou senha incorretos!"
+		<h:outputText value="User or password incorrect!"
 			rendered="#{param.erro}" style="color: darkred" />
 		<div align="left">
 			<form action="${request.contextPath}/appLogin" method="post">

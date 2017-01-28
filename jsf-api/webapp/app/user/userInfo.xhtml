@@ -5,23 +5,25 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<p:growl id="messages" sticky="true" />
-			<p:panelGrid columns="2" bgcolor="gray">
+		<p:panel header="User Info" style="margin-bottom:20px">
+			<h:form>
+				<p:growl id="messages" sticky="true" />
+				<p:panelGrid columns="2" bgcolor="gray">
 
-				<h:outputLabel value="Id: " />
-				<h:outputLabel value="#{userInfoBean.user.id}" />
+					<h:outputLabel value="Id: " />
+					<h:outputLabel value="#{userInfoBean.user.id}" />
 
-				<h:outputLabel value="Login: " />
-				<h:outputLabel value="#{userInfoBean.user.login}" />
+					<h:outputLabel value="Login: " />
+					<h:outputLabel value="#{userInfoBean.user.login}" />
 
-				<h:outputLabel value="Enabled:" />
-				<h:outputLabel value="#{userInfoBean.user.enabled}" />
+					<h:outputLabel value="Enabled:" />
+					<h:outputLabel value="#{userInfoBean.user.enabled}" />
 
-				<h:outputLabel value="User levels:" />
-				<h:outputLabel value="#{userInfoBean.authorizationType}" />
+					<h:outputLabel value="User levels:" />
+					<h:outputLabel value="#{userInfoBean.authorizationType}" />
 
-			</p:panelGrid>
-		</h:form>
+				</p:panelGrid>
+			</h:form>
+		</p:panel>
 	</ui:define>
 </ui:composition>

@@ -5,32 +5,16 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
-		<!-- 		<h:form> -->
-		<!-- 			<p:growl id="messages" showDetail="true" /> -->
-		<!-- 			<p:panelGrid columns="2" bgcolor="gray"> -->
-
-		<!-- 				<h:outputLabel value="Login: " /> -->
-		<!-- 				<p:inputText value="#{userAddBean.user.login}" required="true" -->
-		<!-- 					requiredMessage="#{msg['user.login.required']}" /> -->
-
-		<!-- 				<h:outputLabel value="Password: " /> -->
-		<!-- 				<p:inputText value="#{userAddBean.user.password}" required="true" -->
-		<!-- 					requiredMessage="#{msg['user.password.required']}" /> -->
-
-		<!-- 				<h:outputLabel value="Enabled: " /> -->
-		<!-- 				<p:selectOneMenu value="#{userAddBean.user.enabled}" required="true"> -->
-		<!-- 					<f:selectItem itemValue="true" itemLabel="Yes" /> -->
-		<!-- 					<f:selectItem itemValue="false" itemLabel="No" /> -->
-		<!-- 				</p:selectOneMenu> -->
-
-		<!-- 				<h:outputLabel value="User Levels: " /> -->
-		<!-- 				<p:selectOneMenu value="#{userAddBean.authorizationType}" > -->
-		<!-- 						 <f:selectItems value="#{userAddBean.authorizations}" var="p" itemLabel="#{p}" itemValue="#{p}" /> -->
-		<!-- 				</p:selectOneMenu> -->
-
-		<!-- 				<h:commandButton value="Add" actionListener="#{userAddBean.add}" /> -->
-		<!-- 			</p:panelGrid> -->
-		<!-- 		</h:form> -->
-		<h1>CUSTOMER</h1>
+		<p:panel id="basic" header="Shop" style="margin-bottom:20px">
+			<p:dataList value="#{shopBean.products}" var="product" type="definition">
+				<f:facet name="header">
+           			 Definition
+		        </f:facet>
+		        	Name: #{product.name}, Type: #{product.productType.description}
+		        <f:facet name="description">
+					value: #{product.value}
+				</f:facet>
+			</p:dataList>
+		</p:panel>
 	</ui:define>
 </ui:composition>

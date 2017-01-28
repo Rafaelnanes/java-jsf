@@ -8,8 +8,16 @@
 		<h:form>
 			<p:growl id="messages" sticky="true" />
 			<p:panelGrid columns="2" bgcolor="gray">
-				<h:outputLabel value="Name: "></h:outputLabel>
-				<p:inputText value="#{productInfoBean.product.name}" required="true" />
+				
+				<h:outputLabel value="Name: " />
+				<h:outputLabel value="#{productAddBean.product.name}" />
+
+				<h:outputLabel value="Value: " />
+				<h:outputLabel value="#{productAddBean.product.value}" />
+				
+				<h:outputLabel value="Type:" />
+				<h:outputLabel value="#{productAddBean.product.productType}" />
+				
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

@@ -8,9 +8,22 @@
 		<h:form>
 			<p:growl id="messages" sticky="true" />
 			<p:panelGrid columns="2" bgcolor="gray">
-				<h:outputLabel value="Name: "></h:outputLabel>
-				<p:inputText value="#{productAddBean.product.name}" required="true" />
-				<h:commandButton value="Create" actionListener="#{productAddBean.create}" />
+
+				<h:outputLabel value="Name: " />
+				<p:inputText value="#{productAddBean.product.name}" required="true" requiredMessage="#{msg.nameRequired}" />
+
+				<h:outputLabel value="Value: " />
+				<p:inputText value="#{productAddBean.product.value}" required="true" requiredMessage="#{msg.valueRequired}">
+					<f:validateDoubleRange minimum="1" maximum="500000"></f:validateDoubleRange>
+				</p:inputText>
+				
+				<h:outputLabel value="Type:" />
+				<p:selectOneMenu value="#{productAddBean.product.productType}"  required="true" >
+					<f:selectItems value="#{productAddBean.productTypes}" />
+				</p:selectOneMenu>
+				
+				<h:commandButton value="Create"
+					actionListener="#{productAddBean.create}" />
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

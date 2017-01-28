@@ -1,6 +1,7 @@
 package rbn.edu.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -8,16 +9,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import rbn.edu.enums.ProductTypeEnum;
 
 @Entity
 @Table(name = "PRO_PRODUCT")
-@AttributeOverrides({ @AttributeOverride(name = AbstracEntity.PK, column = @Column(name = "PRO_ID")) })
-public class Product extends AbstracEntity<Long> {
+@AttributeOverrides({ @AttributeOverride(name = AbstractEntity.PK, column = @Column(name = Product.PK)) })
+public class Product extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = -3721178740679096393L;
+    public static final String PK = "PRO_ID";
 
     @Column(name = "PRO_NAME", nullable = false)
     private String name;
@@ -28,6 +32,9 @@ public class Product extends AbstracEntity<Long> {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "PRO_TYPE", nullable = false)
     private ProductTypeEnum productType;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.product")
+    private List<CustomerProduct> customerProducts;
 
     public String getName() {
 	return name;
@@ -51,6 +58,14 @@ public class Product extends AbstracEntity<Long> {
 
     public void setProductType(ProductTypeEnum productType) {
 	this.productType = productType;
+    }
+
+    public List<CustomerProduct> getCustomerProducts() {
+	return customerProducts;
+    }
+
+    public void setCustomerProducts(List<CustomerProduct> customerProducts) {
+	this.customerProducts = customerProducts;
     }
 
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public enum UserAuthorizationType {
 
-    ROLE_ADMIN("ROLE_ADMIN"), ROLE_VISITOR("ROLE_VISITOR"), ROLE_CLIENT("ROLE_CLIENT");
+    ROLE_ADMIN("ROLE_ADMIN"), ROLE_VISITOR("ROLE_VISITOR"), ROLE_CUSTOMER("ROLE_CUSTOMER");
 
     private final String text;
 
@@ -24,7 +24,7 @@ public enum UserAuthorizationType {
 	Set<UserAuthorizationType> niveis = new HashSet<UserAuthorizationType>();
 	niveis.add(ROLE_ADMIN);
 	niveis.add(ROLE_VISITOR);
-	niveis.add(ROLE_CLIENT);
+	niveis.add(ROLE_CUSTOMER);
 	return niveis;
     }
 

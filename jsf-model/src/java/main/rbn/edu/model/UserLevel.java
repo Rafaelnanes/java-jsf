@@ -19,8 +19,8 @@ import rbn.edu.enums.UserAuthorizationType;
 
 @Entity
 @Table(name = "USL_USER_LEVEL")
-@AttributeOverrides({ @AttributeOverride(name = AbstracEntity.PK, column = @Column(name = UserLevel.PK)) })
-public class UserLevel extends AbstracEntity<Long> implements GrantedAuthority {
+@AttributeOverrides({ @AttributeOverride(name = AbstractEntity.PK, column = @Column(name = UserLevel.PK)) })
+public class UserLevel extends AbstractEntity<Long> implements GrantedAuthority {
 
     public static final String USN_LEVEL = "USL_LEVEL";
     public static final String PK = "USL_ID";

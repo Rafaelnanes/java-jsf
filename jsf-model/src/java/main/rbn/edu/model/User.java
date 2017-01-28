@@ -13,8 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USR_USER")
-@AttributeOverrides({ @AttributeOverride(name = AbstracEntity.PK, column = @Column(name = User.USR_ID)) })
-public class User extends AbstracEntity<Long> {
+@AttributeOverrides({ @AttributeOverride(name = AbstractEntity.PK, column = @Column(name = User.USR_ID)) })
+public class User extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1391921840247909984L;
 

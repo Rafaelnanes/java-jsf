@@ -6,23 +6,26 @@
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
 		<h:form>
-			<p:growl id="messages" sticky="true" />
+			<p:growl id="messages" showDetail="true" />
 			<p:panelGrid columns="2" bgcolor="gray">
 
 				<h:outputLabel value="Name: " />
-				<p:inputText value="#{productAddBean.product.name}" required="true" requiredMessage="#{msg.nameRequired}" />
+				<p:inputText value="#{productAddBean.product.name}" required="true"
+					requiredMessage="#{msg.nameRequired}" />
 
 				<h:outputLabel value="Value: " />
-				<p:inputText value="#{productAddBean.product.value}" required="true" requiredMessage="#{msg.valueRequired}">
-					<f:validateDoubleRange minimum="1" maximum="500000"></f:validateDoubleRange>
-				</p:inputText>
-				
+				<p:inputText value="#{productAddBean.product.value}" required="true"
+					requiredMessage="#{msg.valueRequired}"
+					validator="rbn.edu.validators.ProductValueValidator" />
+
 				<h:outputLabel value="Type:" />
-				<p:selectOneMenu value="#{productAddBean.product.productType}" required="true" >
-					<f:selectItems var="p" itemLabel="#{p.description}" value="#{productAddBean.productTypes}" />
+				<p:selectOneMenu value="#{productAddBean.product.productType}"
+					required="true">
+					<f:selectItems var="p" itemLabel="#{p.description}"
+						value="#{productAddBean.productTypes}" />
 				</p:selectOneMenu>
-				
-				<h:commandButton value="Create"
+
+				<h:commandButton value="Add"
 					actionListener="#{productAddBean.create}" />
 			</p:panelGrid>
 		</h:form>

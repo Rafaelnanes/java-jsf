@@ -5,16 +5,42 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
-		<p:panel id="basic" header="Shop" style="margin-bottom:20px">
-			<p:dataList value="#{shopBean.products}" var="product" type="definition">
-				<f:facet name="header">
-           			 Definition
-		        </f:facet>
-		        	Name: #{product.name}, Type: #{product.productType.description}
-		        <f:facet name="description">
-					value: #{product.value}
-				</f:facet>
-			</p:dataList>
-		</p:panel>
+		<h:form id="shopForm">
+			<p:panel id="basic" header="Shop" style="margin-bottom:20px">
+	
+				<p:dataList value="#{shopBean.products}" var="product" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+			        <f:facet name="header">
+			            Product List 
+			        </f:facet>
+			        <p:commandLink update=":shopForm:productDetail" oncomplete="PF('productDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+			            <f:setPropertyActionListener value="#{product}" target="#{shopBean.productSelected}" />
+			            <h:outputText value="#{product.name}, #{product.productType.description}" />
+			        </p:commandLink>
+			        <h:outputText value="#{product.name}, #{product.productType.description}" style="display:inline-block"/>
+			    </p:dataList>
+		 
+			    <p:dialog id="dialogTeste" header="Product Info" widgetVar="productDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+			        <p:outputPanel id="productDetail" style="text-align:center;">
+			            <p:panelGrid  columns="2" >
+			                <f:facet name="header">
+			                   Product name: #{shopBean.productSelected.name} 
+			                </f:facet>
+			 
+			                <h:outputText  value="Color: " />
+			                <h:outputText  value="#{shopBean.productSelected.productType}"/>
+			 
+			                <h:outputText  value="Price: " />
+			                <h:outputText  value="$#{shopBean.productSelected.value}" />
+			                
+			                <h:outputText  value="" />
+			                <p:commandButton oncomplete="PF('productDialog').hide()" actionListener="#{shopBean.buyProduct}" value="Buy" />
+			                	
+			            </p:panelGrid>
+			        </p:outputPanel>
+			    </p:dialog>
+	
+	
+			</p:panel>
+		</h:form>
 	</ui:define>
 </ui:composition>

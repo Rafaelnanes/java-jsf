@@ -1,4 +1,4 @@
-package rbn.edu.beans;
+package rbn.edu.beans.user;
 
 import java.io.Serializable;
 

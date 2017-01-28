@@ -12,11 +12,11 @@
 
 				<h:outputLabel value="Name: " />
 				<p:inputText value="#{productUpdateBean.product.name}"
-					required="true" requiredMessage="#{msg.nameRequired}" />
+					required="true" requiredMessage="#{msg['product.name.required']}" />
 
 				<h:outputLabel value="Value: " />
 				<p:inputText value="#{productUpdateBean.product.value}"
-					required="true" requiredMessage="#{msg.valueRequired}"
+					required="true" requiredMessage="#{msg['product.value.required']}"
 					validator="rbn.edu.validators.ProductValueValidator" />
 
 				<h:outputLabel value="Type:" />

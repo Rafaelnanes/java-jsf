@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/layout-padrao.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="messages" showDetail="true" />
+			<p:panelGrid columns="2" bgcolor="gray">
+
+				<h:outputLabel value="Login: " />
+				<p:inputText value="#{userAddBean.user.login}" required="true"
+					requiredMessage="#{msg['user.login.required']}" />
+
+				<h:outputLabel value="Password: " />
+				<p:inputText value="#{userAddBean.user.password}" required="true"
+					requiredMessage="#{msg['user.password.required']}" />
+
+				<h:outputLabel value="Enabled: " />
+				<p:selectOneMenu value="#{userAddBean.user.enabled}" required="true">
+					<f:selectItem itemValue="true" itemLabel="Yes" />
+					<f:selectItem itemValue="false" itemLabel="No" />
+				</p:selectOneMenu>
+
+				<!-- 				<h:outputLabel value="User Levels: " /> -->
+				<!-- 				<p:inputText value="#{userAddBean.user.enabled}" required="true" -->
+				<!-- 					requiredMessage="#{msg.nameRequired}" /> -->
+
+				<h:commandButton value="Add" actionListener="#{userAddBean.add}" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

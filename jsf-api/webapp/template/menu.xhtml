@@ -12,6 +12,8 @@
 				<p:menuitem value="List" url="/app/product/productList.xhtml" />
 			</p:submenu>
 			<p:submenu label="User">
+				<p:menuitem value="Add" url="/app/user/userAdd.xhtml" />
+				<p:separator />
 				<p:menuitem value="Logout" action="#{userBean.logout}" rendered="#{userBean.userLogged}" />
 				<p:menuitem value="Login" url="/login.xhtml" rendered="#{!userBean.userLogged}" />
 			</p:submenu>

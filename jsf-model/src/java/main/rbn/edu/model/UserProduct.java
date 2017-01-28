@@ -10,21 +10,18 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CAP_CUSTOMER_PRODUCT")
-@AssociationOverrides({ @AssociationOverride(name = "id.customer", joinColumns = @JoinColumn(name = Customer.PK)),
+@AssociationOverrides({ @AssociationOverride(name = "id.customer", joinColumns = @JoinColumn(name = User.PK)),
 	@AssociationOverride(name = "id.product", joinColumns = @JoinColumn(name = Product.PK)) })
-public class CustomerProduct implements Serializable {
+public class UserProduct implements Serializable {
 
     private static final long serialVersionUID = -533496301514736714L;
 
     @EmbeddedId
-    private CustomerProductId id;
+    private UserProductId id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CAP_DATE")
     private Date date;
 
@@ -36,11 +33,11 @@ public class CustomerProduct implements Serializable {
 	this.date = date;
     }
 
-    public CustomerProductId getId() {
+    public UserProductId getId() {
 	return id;
     }
 
-    public void setId(CustomerProductId id) {
+    public void setId(UserProductId id) {
 	this.id = id;
     }
 

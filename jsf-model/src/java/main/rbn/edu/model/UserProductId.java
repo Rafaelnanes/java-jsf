@@ -6,23 +6,15 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class CustomerProductId implements Serializable {
+public class UserProductId implements Serializable {
 
     private static final long serialVersionUID = -1233677136776599826L;
 
     @ManyToOne
-    private Customer customer;
+    private User user;
 
     @ManyToOne
     private Product product;
-
-    public Customer getCustomer() {
-	return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-	this.customer = customer;
-    }
 
     public Product getProduct() {
 	return product;
@@ -30,6 +22,14 @@ public class CustomerProductId implements Serializable {
 
     public void setProduct(Product product) {
 	this.product = product;
+    }
+
+    public User getUser() {
+	return user;
+    }
+
+    public void setUser(User user) {
+	this.user = user;
     }
 
 }

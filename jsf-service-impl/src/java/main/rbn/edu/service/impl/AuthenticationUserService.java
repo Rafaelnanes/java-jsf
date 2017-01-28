@@ -14,13 +14,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rbn.edu.dao.IUserDAO;
 import rbn.edu.dao.IUserLevelDAO;
-import rbn.edu.enums.UserAuthorizationType;
 import rbn.edu.model.User;
 import rbn.edu.model.UserLevel;
 
@@ -49,10 +47,6 @@ public class AuthenticationUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
 	User appUser = userDAO.findUserByLogin(login);
-	if (appUser == null && login.equals("adm")) {
-	    addAdmUser();
-	    appUser = userDAO.findUserByLogin(login);
-	}
 
 	List<GrantedAuthority> authorities = buildUserAuthority(appUser.getUserLevels());
 
@@ -77,21 +71,6 @@ public class AuthenticationUserService implements UserDetailsService {
 	List<GrantedAuthority> lista = new ArrayList<GrantedAuthority>(setAuths);
 
 	return lista;
-    }
-
-    @Transactional
-    public void addAdmUser() {
-	User user = new User();
-	user.setEnabled(true);
-	user.setLogin("adm");
-	user.setPassword(new BCryptPasswordEncoder().encode("adm"));
-
-	userDAO.add(user);
-
-	for (UserAuthorizationType auth : UserAuthorizationType.getValues()) {
-	    userLevelDAO.add(new UserLevel(auth, user));
-	}
-
     }
 
 }

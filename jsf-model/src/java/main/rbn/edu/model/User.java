@@ -3,25 +3,22 @@ package rbn.edu.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USR_USER")
-public class User {
+@AttributeOverrides({ @AttributeOverride(name = AbstracEntity.PK, column = @Column(name = User.USR_ID)) })
+public class User extends AbstracEntity<Long> {
+
+    private static final long serialVersionUID = 1391921840247909984L;
 
     public static final String USR_ID = "USR_ID";
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = USR_ID)
-    private Integer id;
 
     @Column(name = "USR_LOGIN", nullable = false, length = 20, unique = true)
     private String login;
@@ -42,14 +39,6 @@ public class User {
 	this.login = login;
 	this.password = password;
 	this.enabled = enabled;
-    }
-
-    public Integer getId() {
-	return id;
-    }
-
-    public void setId(Integer id) {
-	this.id = id;
     }
 
     public String getLogin() {

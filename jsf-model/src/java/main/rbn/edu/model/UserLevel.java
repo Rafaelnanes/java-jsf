@@ -1,5 +1,7 @@
 package rbn.edu.model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +19,8 @@ import rbn.edu.enums.UserAuthorizationType;
 
 @Entity
 @Table(name = "USL_USER_LEVEL")
-public class UserLevel implements GrantedAuthority {
+@AttributeOverrides({ @AttributeOverride(name = AbstracEntity.PK, column = @Column(name = UserLevel.PK)) })
+public class UserLevel extends AbstracEntity<Long> implements GrantedAuthority {
 
     public static final String USN_LEVEL = "USL_LEVEL";
     public static final String PK = "USL_ID";

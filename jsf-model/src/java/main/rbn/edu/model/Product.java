@@ -1,24 +1,21 @@
 package rbn.edu.model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import rbn.edu.enums.ProductType;
 
 @Entity
 @Table(name = "PRO_PRODUCT")
-public class Product {
+@AttributeOverrides({ @AttributeOverride(name = AbstracEntity.PK, column = @Column(name = "PRO_ID")) })
+public class Product extends AbstracEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "PRO_ID")
-    private long id;
+    private static final long serialVersionUID = -3721178740679096393L;
 
     @Column(name = "PRO_NAME", nullable = false)
     private String name;
@@ -29,14 +26,6 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "PRO_TYPE", nullable = false)
     private ProductType productType;
-
-    public long getId() {
-	return id;
-    }
-
-    public void setId(long id) {
-	this.id = id;
-    }
 
     public String getName() {
 	return name;

@@ -2,17 +2,18 @@ package rbn.edu.beans.product;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import rbn.edu.beans.AbstractBean;
 import rbn.edu.model.Product;
 import rbn.edu.service.IProductService;
 import rbn.edu.util.UtilJSF;
 
-@Component
+@ManagedBean
 @ViewScoped
 public class ProductListBean extends AbstractBean {
 
@@ -20,6 +21,12 @@ public class ProductListBean extends AbstractBean {
 
     @Autowired
     protected IProductService productService;
+
+    @PostConstruct
+    @Override
+    protected void init() {
+	super.init();
+    }
 
     public List<Product> getProducts() {
 	return productService.getAll();

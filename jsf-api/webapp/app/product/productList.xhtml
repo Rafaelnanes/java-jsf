@@ -28,8 +28,9 @@
 					</p:commandLink>
 				</p:column>
 				<p:column>
-					<p:commandLink value="[Update]" action="#{productMainBean.redirectToUpdate}" >
+					<p:commandLink value="[Update]" action="#{productUpdateBean.redirectToUpdate}" >
 						<f:param name="id" value="#{p.id}" />
+						<f:param name="operation" value="UPDATE" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>

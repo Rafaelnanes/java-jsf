@@ -23,16 +23,19 @@ public class ProductService implements IProductService {
     }
 
     @Override
+    @Transactional
     public Product update(Product t) {
 	return productDAO.update(t);
     }
 
     @Override
+    @Transactional
     public List<Product> getAll() {
 	return productDAO.getAll();
     }
 
     @Override
+    @Transactional
     public Product getById(long id) {
 	return productDAO.getById(id);
     }

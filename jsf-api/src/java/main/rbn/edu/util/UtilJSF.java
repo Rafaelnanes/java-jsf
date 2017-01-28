@@ -9,8 +9,7 @@ public class UtilJSF {
 
     public static Map<String, String> getParameters() {
 	FacesContext fc = FacesContext.getCurrentInstance();
-	Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
-	return params;
+	return fc.getExternalContext().getRequestParameterMap();
     }
 
     public static void FaceMessage(String mensagem) {

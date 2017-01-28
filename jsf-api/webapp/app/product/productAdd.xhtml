@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/layout-padrao.xhtml">
+	<ui:define name="conteudo">
+		<h:form>
+			<p:growl id="messages" sticky="true" />
+			<p:panelGrid columns="2" bgcolor="gray">
+				<h:outputLabel value="Name: "></h:outputLabel>
+				<p:inputText value="#{productAddBean.product.name}" required="true" />
+				<h:commandButton value="Create" actionListener="#{productAddBean.create}" />
+			</p:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

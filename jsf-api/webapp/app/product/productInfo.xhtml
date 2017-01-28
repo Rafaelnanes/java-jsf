@@ -9,8 +9,7 @@
 			<p:growl id="messages" sticky="true" />
 			<p:panelGrid columns="2" bgcolor="gray">
 				<h:outputLabel value="Name: "></h:outputLabel>
-				<p:inputText value="#{productMainBean.product.name}" required="true" />
-				<h:commandButton value="#{productMainBean.actionName}" action="#{productMainBean.executeOperation}" />
+				<p:inputText value="#{productInfoBean.product.name}" required="true" />
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

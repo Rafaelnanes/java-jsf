@@ -18,8 +18,8 @@
 				</p:inputText>
 				
 				<h:outputLabel value="Type:" />
-				<p:selectOneMenu value="#{productAddBean.product.productType}"  required="true" >
-					<f:selectItems value="#{productAddBean.productTypes}" />
+				<p:selectOneMenu value="#{productAddBean.product.productType}" required="true" >
+					<f:selectItems var="p" itemLabel="#{p.description}" value="#{productAddBean.productTypes}" />
 				</p:selectOneMenu>
 				
 				<h:commandButton value="Create"

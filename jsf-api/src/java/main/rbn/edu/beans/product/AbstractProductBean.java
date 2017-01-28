@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import rbn.edu.beans.AbstractBean;
-import rbn.edu.enums.ProductType;
+import rbn.edu.enums.ProductTypeEnum;
 import rbn.edu.model.Product;
 import rbn.edu.service.IProductService;
 
@@ -19,11 +19,11 @@ public abstract class AbstractProductBean extends AbstractBean {
 
     protected Product product = new Product();
 
-    protected List<ProductType> productTypes = new ArrayList<ProductType>();
+    protected List<ProductTypeEnum> productTypes = new ArrayList<ProductTypeEnum>();
 
     public AbstractProductBean() {
 	super.init();
-	for (ProductType type : ProductType.values()) {
+	for (ProductTypeEnum type : ProductTypeEnum.values()) {
 	    productTypes.add(type);
 	}
     }
@@ -40,11 +40,11 @@ public abstract class AbstractProductBean extends AbstractBean {
 	this.product = product;
     }
 
-    public List<ProductType> getProductTypes() {
+    public List<ProductTypeEnum> getProductTypes() {
 	return productTypes;
     }
 
-    public void setProductTypes(List<ProductType> productTypes) {
+    public void setProductTypes(List<ProductTypeEnum> productTypes) {
 	this.productTypes = productTypes;
     }
 

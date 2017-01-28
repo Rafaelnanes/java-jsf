@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import rbn.edu.dao.IUserDAO;
-import rbn.edu.dao.IUserLevelDAO;
 import rbn.edu.model.User;
 import rbn.edu.model.UserLevel;
 
@@ -27,8 +26,6 @@ public class AuthenticationUserService implements UserDetailsService {
 
     @Autowired
     private IUserDAO userDAO;
-    @Autowired
-    private IUserLevelDAO userLevelDAO;
 
     public boolean isUsuarioLogado() {
 	String login = null;
@@ -48,7 +45,10 @@ public class AuthenticationUserService implements UserDetailsService {
 
 	User appUser = userDAO.findUserByLogin(login);
 
-	List<GrantedAuthority> authorities = buildUserAuthority(appUser.getUserLevels());
+	List<GrantedAuthority> authorities = null;
+	if (appUser != null && appUser.getUserLevels() != null) {
+	    authorities = buildUserAuthority(appUser.getUserLevels());
+	}
 
 	return buildUserForAuthentication(appUser, authorities);
     }

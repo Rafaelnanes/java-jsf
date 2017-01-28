@@ -8,7 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-import rbn.edu.enums.ProductType;
+import rbn.edu.enums.ProductTypeEnum;
 
 @Entity
 @Table(name = "PRO_PRODUCT")
@@ -25,7 +25,7 @@ public class Product extends AbstracEntity<Long> {
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "PRO_TYPE", nullable = false)
-    private ProductType productType;
+    private ProductTypeEnum productType;
 
     public String getName() {
 	return name;
@@ -43,11 +43,11 @@ public class Product extends AbstracEntity<Long> {
 	this.value = value;
     }
 
-    public ProductType getProductType() {
+    public ProductTypeEnum getProductType() {
 	return productType;
     }
 
-    public void setProductType(ProductType productType) {
+    public void setProductType(ProductTypeEnum productType) {
 	this.productType = productType;
     }
 

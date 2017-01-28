@@ -1,27 +1,25 @@
 package rbn.edu.enums;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public enum UserAuthorizationType {
 
     ROLE_ADMIN("ROLE_ADMIN"), ROLE_VISITOR("ROLE_VISITOR"), ROLE_CUSTOMER("ROLE_CUSTOMER");
 
-    private final String text;
+    private final String value;
 
-    private UserAuthorizationType(final String text) {
-	this.text = text;
+    private UserAuthorizationType(final String value) {
+	this.value = value;
     }
 
     @Override
     public String toString() {
-	return text;
+	return value;
     }
 
-    public static Set<UserAuthorizationType> getValues() {
-	Set<UserAuthorizationType> niveis = new HashSet<UserAuthorizationType>();
+    public static List<UserAuthorizationType> getValues() {
+	List<UserAuthorizationType> niveis = new ArrayList<UserAuthorizationType>();
 	niveis.add(ROLE_ADMIN);
 	niveis.add(ROLE_VISITOR);
 	niveis.add(ROLE_CUSTOMER);

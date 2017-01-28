@@ -12,17 +12,25 @@ import rbn.edu.util.UtilJSF;
 
 @ManagedBean
 @ViewScoped
-public class UserAddBean extends AbstractUserBean {
+public class UserUpdateBean extends AbstractUserBean {
 
     private static final long serialVersionUID = -5563557539843689988L;
 
-    public void add() {
+    public UserUpdateBean() {
+	String id = UtilJSF.getParameters().get("id");
+	if (id != null) {
+	    getBydId(Long.valueOf(id));
+	}
+	user.setPassword("");
+    }
+
+    public void update() {
 	Set<UserLevel> level = new HashSet<UserLevel>();
 	level.add(new UserLevel(authorizationType, user));
 	user.setUserLevels(level);
-	userService.add(user);
+	userService.update(user);
 	user = new User();
-	UtilJSF.FaceMessage("User added");
+	UtilJSF.FaceMessage("User updated");
     }
 
 }

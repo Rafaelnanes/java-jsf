@@ -19,8 +19,7 @@
 					validator="rbn.edu.validators.ProductValueValidator" />
 
 				<h:outputLabel value="Type:" />
-				<p:selectOneMenu value="#{productAddBean.product.productType}"
-					required="true">
+				<p:selectOneMenu value="#{productAddBean.product.productType}" >
 					<f:selectItems var="p" itemLabel="#{p.description}"
 						value="#{productAddBean.productTypes}" />
 				</p:selectOneMenu>

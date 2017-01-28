@@ -6,9 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,11 +22,6 @@ public class UserLevel extends AbstractEntity<Long> implements GrantedAuthority 
     public static final String USN_LEVEL = "USL_LEVEL";
     public static final String PK = "USL_ID";
     private static final long serialVersionUID = -4600840153957593563L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = PK, unique = true, nullable = false)
-    private Long userLevelId;
 
     @ManyToOne
     @JoinColumn(name = User.USR_ID, nullable = false)
@@ -50,6 +42,34 @@ public class UserLevel extends AbstractEntity<Long> implements GrantedAuthority 
     @Override
     public String getAuthority() {
 	return level.toString();
+    }
+
+    public User getUser() {
+	return user;
+    }
+
+    public void setUser(User user) {
+	this.user = user;
+    }
+
+    public UserAuthorizationType getLevel() {
+	return level;
+    }
+
+    public void setLevel(UserAuthorizationType level) {
+	this.level = level;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	UserLevel userLevel = (UserLevel) obj;
+	if (this.id != null && userLevel.getId() != null) {
+	    if (this.id.intValue() == userLevel.getId().intValue()) {
+		return true;
+	    }
+
+	}
+	return false;
     }
 
 }

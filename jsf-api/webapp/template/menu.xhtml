@@ -13,6 +13,7 @@
 			</p:submenu>
 			<p:submenu label="User">
 				<p:menuitem value="Add" url="/app/user/userAdd.xhtml" />
+				<p:menuitem value="List" url="/app/user/userList.xhtml" />
 				<p:separator />
 				<p:menuitem value="Logout" action="#{userBean.logout}" rendered="#{userBean.userLogged}" />
 				<p:menuitem value="Login" url="/login.xhtml" rendered="#{!userBean.userLogged}" />

@@ -76,8 +76,10 @@ public class User extends AbstractEntity<Long> {
     @Override
     public boolean equals(Object obj) {
 	User user = (User) obj;
-	if (this.id.intValue() == user.getId().intValue()) {
-	    return true;
+	if (this.id != null && user.getId() != null) {
+	    if (this.id.intValue() == user.getId().intValue()) {
+		return true;
+	    }
 	}
 	return false;
     }

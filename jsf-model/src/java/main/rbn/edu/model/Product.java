@@ -1,5 +1,7 @@
 package rbn.edu.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -21,7 +23,7 @@ public class Product extends AbstracEntity<Long> {
     private String name;
 
     @Column(name = "PRO_VALUE", nullable = false, precision = 10, scale = 2)
-    private Double value;
+    private BigDecimal value;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "PRO_TYPE", nullable = false)
@@ -35,11 +37,11 @@ public class Product extends AbstracEntity<Long> {
 	this.name = name;
     }
 
-    public Double getValue() {
+    public BigDecimal getValue() {
 	return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(BigDecimal value) {
 	this.value = value;
     }
 

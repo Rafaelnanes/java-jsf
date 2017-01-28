@@ -1,7 +1,5 @@
 package rbn.edu.beans.product;
 
-import java.io.IOException;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
@@ -23,10 +21,6 @@ public class ProductUpdateBean extends AbstractProductBean {
     public void update() {
 	productService.update(product);
 	UtilJSF.FaceMessage("Product updated");
-    }
-
-    public String redirectToUpdate() throws IOException {
-	return "productUpdate.xhtml";
     }
 
 }

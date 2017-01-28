@@ -1,5 +1,6 @@
 package rbn.edu.beans.product;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -36,6 +37,10 @@ public class ProductListBean extends AbstractBean {
 	Long id = Long.valueOf(UtilJSF.getParameters().get("id"));
 	productService.remove(id);
 	UtilJSF.FaceMessage("Product removed");
+    }
+
+    public String redirectToInfo() throws IOException {
+	return "productInfo.xhtml";
     }
 
 }

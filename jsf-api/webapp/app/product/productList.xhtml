@@ -27,11 +27,17 @@
 							icon="ui-icon-alert" />
 					</p:commandLink>
 				</p:column>
+				
 				<p:column>
-					<p:commandLink value="[Update]" action="#{productUpdateBean.redirectToUpdate}" >
+					<h:link value="[Update]" outcome="productUpdate.xhtml" >
 						<f:param name="id" value="#{p.id}" />
-						<f:param name="operation" value="UPDATE" />
-					</p:commandLink>
+					</h:link>
+				</p:column>
+				
+				<p:column>
+					<h:link value="[Info]" outcome="productInfo.xhtml" >
+						<f:param name="id" value="#{p.id}" />
+					</h:link>
 				</p:column>
 			</p:dataTable>
 

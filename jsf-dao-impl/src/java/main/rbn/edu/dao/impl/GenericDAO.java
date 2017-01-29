@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +36,7 @@ public abstract class GenericDAO<T> {
     @SuppressWarnings("unchecked")
     public List<T> getAll() {
 	Criteria criteria = getSession().createCriteria(getPersistenceClass());
+	criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 	return criteria.list();
     }
 
@@ -42,6 +44,7 @@ public abstract class GenericDAO<T> {
     public T getById(long id) {
 	Criteria criteria = getSession().createCriteria(getPersistenceClass());
 	criteria.add(Restrictions.eq("id", id));
+	criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 	return (T) criteria.uniqueResult();
     }
 
@@ -49,6 +52,7 @@ public abstract class GenericDAO<T> {
     public void remove(long id) {
 	Criteria criteria = getSession().createCriteria(getPersistenceClass());
 	criteria.add(Restrictions.eq("id", id));
+	criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 	T prod = (T) criteria.uniqueResult();
 	getSession().delete(prod);
     }

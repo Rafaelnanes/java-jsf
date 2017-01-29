@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import rbn.edu.dao.IUserDAO;
 import rbn.edu.model.User;
@@ -46,7 +47,7 @@ public class AuthenticationUserService implements UserDetailsService {
 	User appUser = userDAO.findUserByLogin(login);
 
 	List<GrantedAuthority> authorities = null;
-	if (appUser != null && appUser.getUserLevels() != null) {
+	if (appUser != null && !CollectionUtils.isEmpty(appUser.getUserLevels())) {
 	    authorities = buildUserAuthority(appUser.getUserLevels());
 	}
 

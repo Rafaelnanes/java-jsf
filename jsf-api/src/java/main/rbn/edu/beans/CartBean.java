@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.Product;
@@ -32,16 +33,25 @@ public class CartBean extends AbstractBean {
     private Product productSelected = new Product();
     private List<Product> productsSelected = new ArrayList<Product>();
     private BigDecimal totalPrice = BigDecimal.ZERO;
+    private User user;
 
     @Override
     @PostConstruct
     protected void init() {
 	super.init();
+	user = userService.getUserLogged();
+	List<UserProduct> cartItens = userProductService.getByUser(user.getId());
+	if (!CollectionUtils.isEmpty(cartItens)) {
+	    for (UserProduct up : cartItens) {
+		productsSelected.add(up.getProduct());
+		totalPrice = totalPrice.add(up.getProduct().getValue());
+	    }
+	}
+
     }
 
     public void saveCart() {
 	try {
-	    User user = userService.getUserLogged();
 	    List<UserProduct> userProducts = new ArrayList<UserProduct>();
 	    for (Product product : productsSelected) {
 		UserProduct userProduct = new UserProduct();
@@ -70,6 +80,11 @@ public class CartBean extends AbstractBean {
 		productsSelected.remove(i);
 	    }
 	}
+    }
+
+    public String redirectToPay() {
+	saveCart();
+	return "paymentCenter.xhtml";
     }
 
     public Product getProductSelected() {

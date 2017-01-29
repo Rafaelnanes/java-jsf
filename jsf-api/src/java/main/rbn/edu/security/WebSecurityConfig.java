@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		.antMatchers("/app/user/**").access("hasRole('ROLE_ADMIN')")//
 		.antMatchers("/app/product/**").access("hasRole('ROLE_ADMIN')")//
-		.antMatchers("/app/customer/**").access("hasAnyRole('ROLE_CUSTOMER', 'ROLE_ADMIN')")//
+		.antMatchers("/app/customer/**").access("hasAnyRole('ROLE_CUSTOMER')")//
 		.and().exceptionHandling().accessDeniedPage("/403.xhtml")
 
 		.and().formLogin().loginPage("/login.xhtml").loginProcessingUrl("/appLogin")

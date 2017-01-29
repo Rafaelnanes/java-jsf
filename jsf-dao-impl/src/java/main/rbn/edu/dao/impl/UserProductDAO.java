@@ -3,8 +3,10 @@ package rbn.edu.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import rbn.edu.dao.IUserProductDAO;
 import rbn.edu.model.UserProduct;
@@ -24,22 +26,27 @@ public class UserProductDAO extends GenericDAO<UserProduct> implements IUserProd
 	for (UserProduct userProduct : list) {
 	    getSession().merge(userProduct);
 	}
-
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void clear(long userId) {
-	Criteria criteria = getSession().createCriteria(UserProduct.class);
-	criteria.createAlias("user", "user");
-	criteria.add(Restrictions.eq("user.id", userId));
-	List<UserProduct> list = criteria.list();
-	if (list != null && !list.isEmpty()) {
+	List<UserProduct> list = getByUserId(userId);
+	if (!CollectionUtils.isEmpty(list)) {
 	    for (UserProduct up : list) {
 		getSession().delete(up);
 	    }
 	}
 
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<UserProduct> getByUserId(long userId) {
+	Criteria criteria = getSession().createCriteria(UserProduct.class);
+	criteria.createAlias("user", "user");
+	criteria.add(Restrictions.eq("user.id", userId));
+	criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+	return criteria.list();
     }
 
 }

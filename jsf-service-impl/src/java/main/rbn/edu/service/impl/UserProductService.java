@@ -32,4 +32,9 @@ public class UserProductService implements IUserProductService {
 	userProductDAO.clear(userId);
     }
 
+    @Override
+    public List<UserProduct> getByUser(long userId) {
+	return userProductDAO.getByUserId(userId);
+    }
+
 }

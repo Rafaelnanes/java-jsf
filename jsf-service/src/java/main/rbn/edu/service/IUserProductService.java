@@ -12,4 +12,6 @@ public interface IUserProductService extends Serializable {
 
     void clear(long userId) throws BusinessException;
 
+    List<UserProduct> getByUser(long userId);
+
 }

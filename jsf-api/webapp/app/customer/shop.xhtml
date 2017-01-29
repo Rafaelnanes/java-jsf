@@ -63,11 +63,12 @@
 			                </p:column>
 			 
 			                <p:column style="width:32px;text-align: center">
-			                    <p:commandButton icon="ui-icon-trash" actionListener="#{cartBean.removeProduct(product)}" update=":shopForm:cartForm:cartDataTable, :shopForm:cartForm:totalPrice" />
+			                    <p:commandButton icon="ui-icon-trash" actionListener="#{cartBean.removeProduct(product)}" update=":shopForm:cartForm:cartDataTable, :shopForm:cartForm:totalPrice, :shopForm:cartForm:btnPay" />
 			                </p:column>
 			            </p:dataTable>
 			            Total price: <p:outputLabel id="totalPrice" value="#{cartBean.totalPrice}" />
 			            <p:commandButton actionListener="#{cartBean.saveCart}" value="Save Cart" />
+			            <p:commandButton id="btnPay" action="#{cartBean.redirectToPay}" value="Pay" />
 			    	</h:form>
 			    </p:dialog>
 	

@@ -5,38 +5,69 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/template/layout-padrao.xhtml">
 	<ui:define name="conteudo">
+		<p:growl id="messages" showDetail="true" />
 		<h:form id="shopForm">
 			<p:panel id="basic" header="Shop" style="margin-bottom:20px">
-	
+			
+				<p:commandButton update=":shopForm:cartForm:cartDataTable, :shopForm:cartForm:totalPrice" oncomplete="PF('cartDialog').show()" value="See the cart" icon="ui-icon-extlink" />
+			    
 				<p:dataList value="#{shopBean.products}" var="product" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
 			        <f:facet name="header">
 			            Product List 
 			        </f:facet>
 			        <p:commandLink update=":shopForm:productDetail" oncomplete="PF('productDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
-			            <f:setPropertyActionListener value="#{product}" target="#{shopBean.productSelected}" />
+			            <f:setPropertyActionListener value="#{product}" target="#{cartBean.productSelected}" />
 			            <h:outputText value="#{product.name}, #{product.productType.description}" />
 			        </p:commandLink>
 			        <h:outputText value="#{product.name}, #{product.productType.description}" style="display:inline-block"/>
 			    </p:dataList>
 		 
-			    <p:dialog id="dialogTeste" header="Product Info" widgetVar="productDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+			    <p:dialog header="Product Info" widgetVar="productDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
 			        <p:outputPanel id="productDetail" style="text-align:center;">
 			            <p:panelGrid  columns="2" >
 			                <f:facet name="header">
-			                   Product name: #{shopBean.productSelected.name} 
+			                   Product name: #{cartBean.productSelected.name} 
 			                </f:facet>
 			 
-			                <h:outputText  value="Color: " />
-			                <h:outputText  value="#{shopBean.productSelected.productType}"/>
+			                <h:outputText  value="Type: " />
+			                <h:outputText  value="#{cartBean.productSelected.productType}"/>
 			 
-			                <h:outputText  value="Price: " />
-			                <h:outputText  value="$#{shopBean.productSelected.value}" />
+			                <h:outputText  value="Value: " />
+			                <h:outputText  value="$#{cartBean.productSelected.value}" />
 			                
 			                <h:outputText  value="" />
-			                <p:commandButton oncomplete="PF('productDialog').hide()" actionListener="#{shopBean.buyProduct}" value="Buy" />
+			                <p:commandButton oncomplete="PF('productDialog').hide()" actionListener="#{cartBean.addProduct}" value="Add to Cart" >
+			                </p:commandButton>
 			                	
 			            </p:panelGrid>
 			        </p:outputPanel>
+			    </p:dialog>
+			    
+			    <p:dialog id="cartDialog"  header="Cart Products" widgetVar="cartDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="true" width="1200" >
+			    	<h:form id="cartForm">
+				    	<p:dataTable id="cartDataTable" var="product" value="#{cartBean.productsSelected}">
+			                <p:column headerText="Id">
+			                    <h:outputText value="#{product.id}" />
+			                </p:column>
+			 
+			                <p:column headerText="Name">
+			                    <h:outputText value="#{product.name}" />
+			                </p:column>
+			 
+			                <p:column headerText="Type">
+			                    <h:outputText value="#{product.productType.description}" />
+			                </p:column>
+			 
+			                <p:column headerText="Value">
+			                    <h:outputText value="#{product.value}" />
+			                </p:column>
+			 
+			                <p:column style="width:32px;text-align: center">
+			                    <p:commandButton icon="ui-icon-trash" actionListener="#{cartBean.removeProduct(product)}" update=":shopForm:cartForm:cartDataTable, :shopForm:cartForm:totalPrice" />
+			                </p:column>
+			            </p:dataTable>
+			            Total price: <p:outputLabel id="totalPrice" value="#{cartBean.totalPrice}" />
+			    	</h:form>
 			    </p:dialog>
 	
 	

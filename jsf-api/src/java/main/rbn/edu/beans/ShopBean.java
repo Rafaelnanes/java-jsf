@@ -20,7 +20,7 @@ public class ShopBean extends AbstractBean {
 
     @Autowired
     private IProductService productService;
-    private Product productSelected = new Product();
+
     private List<Product> products = new ArrayList<Product>();
 
     public ShopBean() {
@@ -34,24 +34,8 @@ public class ShopBean extends AbstractBean {
 	products = productService.getAll();
     }
 
-    public void getTeste() {
-	System.out.println("PF('productDialog').show()");
-    }
-
     public List<Product> getProducts() {
 	return products;
-    }
-
-    public void buyProduct() {
-	System.out.println("sdbsbbbt");
-    }
-
-    public Product getProductSelected() {
-	return productSelected;
-    }
-
-    public void setProductSelected(Product productSelected) {
-	this.productSelected = productSelected;
     }
 
 }

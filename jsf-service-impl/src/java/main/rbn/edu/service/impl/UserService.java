@@ -33,13 +33,16 @@ public class UserService implements IUserService {
 
     @Override
     public boolean isUserLogged() {
-	String login = null;
+	String login = "anonymousUser";
 	SecurityContext context = SecurityContextHolder.getContext();
 	Authentication authentication = context.getAuthentication();
-	try {
-	    login = (String) authentication.getPrincipal();
-	} catch (ClassCastException e) {
-	    login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+	if (authentication != null) {
+	    try {
+		login = (String) authentication.getPrincipal();
+	    } catch (ClassCastException e) {
+		login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal())
+			.getUsername();
+	    }
 	}
 	return login.equals("anonymousUser") ? false : true;
     }

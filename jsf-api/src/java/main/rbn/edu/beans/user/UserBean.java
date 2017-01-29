@@ -6,6 +6,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import rbn.edu.beans.AbstractBean;
 import rbn.edu.model.User;
@@ -33,6 +34,7 @@ public class UserBean extends AbstractBean {
 
     public String logout() {
 	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	SecurityContextHolder.getContext().setAuthentication(null);
 	return "/login.xhtml";
     }
 

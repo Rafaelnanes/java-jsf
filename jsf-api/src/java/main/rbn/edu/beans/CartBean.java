@@ -2,19 +2,34 @@ package rbn.edu.beans;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.Product;
+import rbn.edu.model.User;
+import rbn.edu.model.UserProduct;
+import rbn.edu.model.UserProductId;
+import rbn.edu.service.IUserProductService;
+import rbn.edu.service.IUserService;
+import rbn.edu.util.UtilJSF;
 
 @ManagedBean
 @SessionScoped
 public class CartBean extends AbstractBean {
 
     private static final long serialVersionUID = 2576703536386888771L;
+
+    @Autowired
+    private IUserProductService userProductService;
+    @Autowired
+    private IUserService userService;
 
     private Product productSelected = new Product();
     private List<Product> productsSelected = new ArrayList<Product>();
@@ -24,6 +39,28 @@ public class CartBean extends AbstractBean {
     @PostConstruct
     protected void init() {
 	super.init();
+    }
+
+    public void saveCart() {
+	try {
+	    User user = userService.getUserLogged();
+	    List<UserProduct> userProducts = new ArrayList<UserProduct>();
+	    for (Product product : productsSelected) {
+
+		UserProduct userProduct = new UserProduct();
+		userProduct.setDate(new Date());
+		UserProductId id = new UserProductId();
+		id.setProduct(product);
+		id.setUser(user);
+		userProduct.setId(id);
+		userProducts.add(userProduct);
+	    }
+	    userProductService.clear(user.getId());
+	    userProductService.save(userProducts);
+	    UtilJSF.FaceMessage("Cart saved");
+	} catch (BusinessException e) {
+	    UtilJSF.FaceMessage(e.getMessage());
+	}
     }
 
     public void addProduct() {

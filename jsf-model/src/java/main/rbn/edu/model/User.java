@@ -1,6 +1,7 @@
 package rbn.edu.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -31,6 +32,9 @@ public class User extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserLevel> userLevels = new HashSet<UserLevel>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.user")
+    private List<UserProduct> userProducts;
 
     public User() {
     }
@@ -71,6 +75,14 @@ public class User extends AbstractEntity<Long> {
 
     public void setUserLevels(Set<UserLevel> userLevels) {
 	this.userLevels = userLevels;
+    }
+
+    public List<UserProduct> getUserProducts() {
+	return userProducts;
+    }
+
+    public void setUserProducts(List<UserProduct> userProducts) {
+	this.userProducts = userProducts;
     }
 
     @Override

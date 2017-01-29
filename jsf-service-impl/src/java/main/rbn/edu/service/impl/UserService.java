@@ -42,6 +42,24 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User getUserLogged() {
+	User user = null;
+	String login = "";
+	if (isUserLogged()) {
+	    SecurityContext context = SecurityContextHolder.getContext();
+	    Authentication authentication = context.getAuthentication();
+	    try {
+		login = (String) authentication.getPrincipal();
+	    } catch (ClassCastException e) {
+		login = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal())
+			.getUsername();
+	    }
+	    user = getUserByLogin(login);
+	}
+	return user;
+    }
+
+    @Override
     @Transactional
     public void add(User t) throws BusinessException {
 	t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
@@ -96,6 +114,11 @@ public class UserService implements IUserService {
     @Override
     public UserLevel getUserLevelById(long id) {
 	return userLevelDAO.getById(id);
+    }
+
+    @Transactional
+    private User getUserByLogin(String login) {
+	return userDAO.findUserByLogin(login);
     }
 
 }

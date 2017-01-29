@@ -67,6 +67,7 @@
 			                </p:column>
 			            </p:dataTable>
 			            Total price: <p:outputLabel id="totalPrice" value="#{cartBean.totalPrice}" />
+			            <p:commandButton actionListener="#{cartBean.saveCart}" value="Save Cart" />
 			    	</h:form>
 			    </p:dialog>
 	

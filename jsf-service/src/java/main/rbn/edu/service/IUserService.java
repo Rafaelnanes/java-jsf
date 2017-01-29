@@ -7,6 +7,8 @@ public interface IUserService extends IGenericService<User> {
 
     boolean isUserLogged();
 
+    User getUserLogged();
+
     UserLevel getUserLevelById(long id);
 
 }

@@ -34,7 +34,7 @@ public class Product extends AbstractEntity<Long> {
     private ProductTypeEnum productType;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.product")
-    private List<UserProduct> customerProducts;
+    private List<UserProduct> userProducts;
 
     public String getName() {
 	return name;
@@ -60,12 +60,12 @@ public class Product extends AbstractEntity<Long> {
 	this.productType = productType;
     }
 
-    public List<UserProduct> getCustomerProducts() {
-	return customerProducts;
+    public List<UserProduct> getUserProducts() {
+	return userProducts;
     }
 
-    public void setCustomerProducts(List<UserProduct> customerProducts) {
-	this.customerProducts = customerProducts;
+    public void setUserProducts(List<UserProduct> userProducts) {
+	this.userProducts = userProducts;
     }
 
 }

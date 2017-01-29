@@ -14,7 +14,7 @@ public abstract class AbstractEntity<PK> implements Serializable {
     public static final String PK = "id";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected PK id;
 
     public PK getId() {

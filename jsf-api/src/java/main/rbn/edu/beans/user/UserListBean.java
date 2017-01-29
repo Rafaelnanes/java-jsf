@@ -31,7 +31,10 @@ public class UserListBean extends AbstractBean {
     }
 
     public List<User> getProducts() {
-	return userService.getAll();
+	List<User> all = userService.getAll();
+	User user = userService.getUserLogged();
+	all.remove(user);
+	return all;
     }
 
     public void remove() {

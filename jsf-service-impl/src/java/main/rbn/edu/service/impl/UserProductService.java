@@ -24,7 +24,6 @@ public class UserProductService implements IUserProductService {
     @Transactional
     public void save(List<UserProduct> list) throws BusinessException {
 	userProductDAO.save(list);
-
     }
 
     @Override

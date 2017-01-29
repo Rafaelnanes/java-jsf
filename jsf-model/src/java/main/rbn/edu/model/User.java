@@ -1,7 +1,6 @@
 package rbn.edu.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.AttributeOverride;
@@ -14,12 +13,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "USR_USER")
-@AttributeOverrides({ @AttributeOverride(name = AbstractEntity.PK, column = @Column(name = User.USR_ID)) })
+@AttributeOverrides({ @AttributeOverride(name = AbstractEntity.PK, column = @Column(name = User.PK)) })
 public class User extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1391921840247909984L;
 
-    public static final String USR_ID = "USR_ID";
+    public static final String PK = "USR_ID";
 
     @Column(name = "USR_LOGIN", nullable = false, length = 20, unique = true)
     private String login;
@@ -32,9 +31,6 @@ public class User extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserLevel> userLevels = new HashSet<UserLevel>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.user")
-    private List<UserProduct> userProducts;
 
     public User() {
     }
@@ -75,14 +71,6 @@ public class User extends AbstractEntity<Long> {
 
     public void setUserLevels(Set<UserLevel> userLevels) {
 	this.userLevels = userLevels;
-    }
-
-    public List<UserProduct> getUserProducts() {
-	return userProducts;
-    }
-
-    public void setUserProducts(List<UserProduct> userProducts) {
-	this.userProducts = userProducts;
     }
 
     @Override

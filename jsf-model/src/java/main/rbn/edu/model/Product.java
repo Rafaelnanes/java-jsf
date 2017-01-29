@@ -1,7 +1,6 @@
 package rbn.edu.model;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -9,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import rbn.edu.enums.ProductTypeEnum;
@@ -32,9 +29,6 @@ public class Product extends AbstractEntity<Long> {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "PRO_TYPE", nullable = false)
     private ProductTypeEnum productType;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id.product")
-    private List<UserProduct> userProducts;
 
     public String getName() {
 	return name;
@@ -58,14 +52,6 @@ public class Product extends AbstractEntity<Long> {
 
     public void setProductType(ProductTypeEnum productType) {
 	this.productType = productType;
-    }
-
-    public List<UserProduct> getUserProducts() {
-	return userProducts;
-    }
-
-    public void setUserProducts(List<UserProduct> userProducts) {
-	this.userProducts = userProducts;
     }
 
 }

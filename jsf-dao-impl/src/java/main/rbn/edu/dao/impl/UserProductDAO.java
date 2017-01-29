@@ -31,7 +31,8 @@ public class UserProductDAO extends GenericDAO<UserProduct> implements IUserProd
     @SuppressWarnings("unchecked")
     public void clear(long userId) {
 	Criteria criteria = getSession().createCriteria(UserProduct.class);
-	criteria.add(Restrictions.eq("id.user.id", userId));
+	criteria.createAlias("user", "user");
+	criteria.add(Restrictions.eq("user.id", userId));
 	List<UserProduct> list = criteria.list();
 	if (list != null && !list.isEmpty()) {
 	    for (UserProduct up : list) {

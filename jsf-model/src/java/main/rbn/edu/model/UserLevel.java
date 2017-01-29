@@ -24,7 +24,7 @@ public class UserLevel extends AbstractEntity<Long> implements GrantedAuthority 
     private static final long serialVersionUID = -4600840153957593563L;
 
     @ManyToOne
-    @JoinColumn(name = User.USR_ID, nullable = false)
+    @JoinColumn(name = User.PK, nullable = false)
     private User user;
 
     @Enumerated(EnumType.STRING)

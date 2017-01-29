@@ -32,7 +32,7 @@ public class UserUpdateBean extends AbstractUserBean {
 	    userService.update(user);
 	    UtilJSF.FaceMessage("User updated");
 	} catch (BusinessException e) {
-	    UtilJSF.FaceMessage(e.getMessage());
+	    UtilJSF.FaceMessageError(e.getMessage());
 	}
     }
 

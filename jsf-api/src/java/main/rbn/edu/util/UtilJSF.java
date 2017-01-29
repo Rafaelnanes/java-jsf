@@ -17,10 +17,9 @@ public class UtilJSF {
 	FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
-    public static void FaceMessage(String mensagem, String detalheMensagem, String idComponente) {
-	detalheMensagem = detalheMensagem == null ? mensagem : detalheMensagem;
-	FacesContext.getCurrentInstance().addMessage(idComponente,
-		new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, detalheMensagem));
+    public static void FaceMessageError(String mensagem) {
+	FacesContext.getCurrentInstance().addMessage(null,
+		new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", mensagem));
     }
 
 }

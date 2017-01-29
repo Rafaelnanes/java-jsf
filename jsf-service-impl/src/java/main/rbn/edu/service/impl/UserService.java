@@ -22,6 +22,8 @@ import rbn.edu.service.IUserService;
 @Service
 public class UserService implements IUserService {
 
+    private static final String USER_LOGIN_ALREADY_EXISTS = "User login already exists.";
+
     @Autowired
     private IUserDAO userDAO;
 
@@ -62,23 +64,40 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public void add(User t) throws BusinessException {
-	t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
-	Set<UserLevel> userLevels = t.getUserLevels();
-	userDAO.add(t);
-	for (UserLevel level : userLevels) {
-	    userLevelDAO.add(level);
+	try {
+	    User userFromDB = userDAO.findUserByLogin(t.getLogin());
+	    if (userFromDB != null) {
+		throw new BusinessException(USER_LOGIN_ALREADY_EXISTS);
+	    }
+	    t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
+	    Set<UserLevel> userLevels = t.getUserLevels();
+	    userDAO.add(t);
+	    for (UserLevel level : userLevels) {
+		userLevelDAO.add(level);
+	    }
+
+	} catch (Exception e) {
+	    throw new BusinessException(e.getMessage());
 	}
     }
 
     @Override
     @Transactional
     public void update(User t) throws BusinessException {
-	t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
-	removeAllUserLevelsByUserId(t.getId());
-	Set<UserLevel> userLevels = t.getUserLevels();
-	updateTransactional(t);
-	for (UserLevel level : userLevels) {
-	    userLevelDAO.add(level);
+	try {
+	    User userFromDB = userDAO.findUserByLogin(t.getLogin());
+	    if (userFromDB != null && userFromDB.getId().intValue() != t.getId().intValue()) {
+		throw new BusinessException(USER_LOGIN_ALREADY_EXISTS);
+	    }
+	    t.setPassword(new BCryptPasswordEncoder().encode(t.getPassword()));
+	    removeAllUserLevelsByUserId(t.getId());
+	    Set<UserLevel> userLevels = t.getUserLevels();
+	    updateTransactional(t);
+	    for (UserLevel level : userLevels) {
+		userLevelDAO.add(level);
+	    }
+	} catch (Exception e) {
+	    throw new BusinessException(e.getMessage());
 	}
     }
 
@@ -107,8 +126,12 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public void remove(long id) throws BusinessException {
-	removeAllUserLevelsByUserId(id);
-	userDAO.remove(id);
+	try {
+	    removeAllUserLevelsByUserId(id);
+	    userDAO.remove(id);
+	} catch (Exception e) {
+	    throw new BusinessException(e.getMessage());
+	}
     }
 
     @Override

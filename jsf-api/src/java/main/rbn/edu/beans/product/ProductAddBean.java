@@ -17,7 +17,7 @@ public class ProductAddBean extends AbstractProductBean {
 	    productService.add(product);
 	    UtilJSF.FaceMessage("Product added");
 	} catch (BusinessException e) {
-	    UtilJSF.FaceMessage(e.getMessage());
+	    UtilJSF.FaceMessageError(e.getMessage());
 	}
     }
 

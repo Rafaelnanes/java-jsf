@@ -26,7 +26,7 @@ public class UserAddBean extends AbstractUserBean {
 	    user = new User();
 	    UtilJSF.FaceMessage("User added");
 	} catch (BusinessException e) {
-	    UtilJSF.FaceMessage("User added");
+	    UtilJSF.FaceMessageError(e.getMessage());
 	}
     }
 

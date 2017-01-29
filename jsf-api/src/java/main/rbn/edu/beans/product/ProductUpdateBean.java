@@ -24,7 +24,7 @@ public class ProductUpdateBean extends AbstractProductBean {
 	    productService.update(product);
 	    UtilJSF.FaceMessage("Product updated");
 	} catch (BusinessException e) {
-	    UtilJSF.FaceMessage(e.getMessage());
+	    UtilJSF.FaceMessageError(e.getMessage());
 	}
     }
 

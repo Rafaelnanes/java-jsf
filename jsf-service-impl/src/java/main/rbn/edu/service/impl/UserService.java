@@ -21,6 +21,7 @@ import rbn.edu.service.IUserService;
 
 @Service
 public class UserService implements IUserService {
+    private static final long serialVersionUID = -7608552073400357475L;
 
     private static final String USER_LOGIN_ALREADY_EXISTS = "User login already exists.";
 

@@ -1,10 +1,11 @@
 package rbn.edu.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import rbn.edu.exceptions.BusinessException;
 
-public interface IGenericService<T> {
+public interface IGenericService<T> extends Serializable {
 
     void add(T t) throws BusinessException;
 

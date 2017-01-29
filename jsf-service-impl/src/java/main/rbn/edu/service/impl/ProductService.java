@@ -14,6 +14,8 @@ import rbn.edu.service.IProductService;
 @Service
 public class ProductService implements IProductService {
 
+    private static final long serialVersionUID = -5974871729758393939L;
+
     @Autowired
     private IProductDAO productDAO;
 

@@ -3,18 +3,17 @@ package rbn.edu.beans.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
-import rbn.edu.beans.AbstractBean;
 import rbn.edu.enums.ProductTypeEnum;
 import rbn.edu.model.Product;
 import rbn.edu.service.IProductService;
 
-public abstract class AbstractProductBean extends AbstractBean {
+@ManagedBean
+public abstract class AbstractProductBean {
 
-    private static final long serialVersionUID = -1409446027935733058L;
-
-    @Autowired
+    @ManagedProperty(value = "#{productService}")
     protected IProductService productService;
 
     protected Product product = new Product();
@@ -22,7 +21,6 @@ public abstract class AbstractProductBean extends AbstractBean {
     protected List<ProductTypeEnum> productTypes = new ArrayList<ProductTypeEnum>();
 
     public AbstractProductBean() {
-	super.init();
 	for (ProductTypeEnum type : ProductTypeEnum.values()) {
 	    productTypes.add(type);
 	}
@@ -46,6 +44,10 @@ public abstract class AbstractProductBean extends AbstractBean {
 
     public void setProductTypes(List<ProductTypeEnum> productTypes) {
 	this.productTypes = productTypes;
+    }
+
+    public void setProductService(IProductService productService) {
+	this.productService = productService;
     }
 
 }

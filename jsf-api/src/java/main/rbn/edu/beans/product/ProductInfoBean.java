@@ -1,5 +1,6 @@
 package rbn.edu.beans.product;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
@@ -9,9 +10,8 @@ import rbn.edu.util.UtilJSF;
 @ViewScoped
 public class ProductInfoBean extends AbstractProductBean {
 
-    private static final long serialVersionUID = -462161027450780784L;
-
-    public ProductInfoBean() {
+    @PostConstruct
+    private void init() {
 	String id = UtilJSF.getParameters().get("id");
 	if (id != null) {
 	    getBydId(Long.valueOf(id));

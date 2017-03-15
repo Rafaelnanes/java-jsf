@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import rbn.edu.exceptions.BusinessException;
@@ -21,13 +21,12 @@ import rbn.edu.util.UtilJSF;
 
 @ManagedBean
 @SessionScoped
-public class CartBean extends AbstractBean {
+public class CartBean {
 
-    private static final long serialVersionUID = 2576703536386888771L;
-
-    @Autowired
+    @ManagedProperty(value = "#{userProductService}")
     private IUserProductService userProductService;
-    @Autowired
+
+    @ManagedProperty(value = "#{userService}")
     private IUserService userService;
 
     private Product productSelected = new Product();
@@ -35,10 +34,8 @@ public class CartBean extends AbstractBean {
     private BigDecimal totalPrice = BigDecimal.ZERO;
     private User user;
 
-    @Override
     @PostConstruct
     protected void init() {
-	super.init();
 	user = userService.getUserLogged();
 	List<UserProduct> cartItens = userProductService.getByUser(user.getId());
 	if (!CollectionUtils.isEmpty(cartItens)) {
@@ -109,6 +106,14 @@ public class CartBean extends AbstractBean {
 
     public void setTotalPrice(BigDecimal totalPrice) {
 	this.totalPrice = totalPrice;
+    }
+
+    public void setUserProductService(IUserProductService userProductService) {
+	this.userProductService = userProductService;
+    }
+
+    public void setUserService(IUserService userService) {
+	this.userService = userService;
     }
 
 }

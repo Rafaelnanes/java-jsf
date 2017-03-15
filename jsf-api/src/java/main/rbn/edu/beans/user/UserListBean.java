@@ -3,13 +3,10 @@ package rbn.edu.beans.user;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import rbn.edu.beans.AbstractBean;
 import rbn.edu.exceptions.BusinessException;
 import rbn.edu.model.User;
 import rbn.edu.service.IUserService;
@@ -17,18 +14,10 @@ import rbn.edu.util.UtilJSF;
 
 @ManagedBean
 @ViewScoped
-public class UserListBean extends AbstractBean {
+public class UserListBean {
 
-    private static final long serialVersionUID = 4088777198917593829L;
-
-    @Autowired
-    protected IUserService userService;
-
-    @PostConstruct
-    @Override
-    protected void init() {
-	super.init();
-    }
+    @ManagedProperty(value = "#{userService}")
+    private IUserService userService;
 
     public List<User> getProducts() {
 	List<User> all = userService.getAll();
@@ -49,6 +38,10 @@ public class UserListBean extends AbstractBean {
 
     public String redirectToInfo() throws IOException {
 	return "userInfo.xhtml";
+    }
+
+    public void setUserService(IUserService userService) {
+	this.userService = userService;
     }
 
 }

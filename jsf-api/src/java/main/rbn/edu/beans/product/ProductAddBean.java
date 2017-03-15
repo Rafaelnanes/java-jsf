@@ -10,8 +10,6 @@ import rbn.edu.util.UtilJSF;
 @ViewScoped
 public class ProductAddBean extends AbstractProductBean {
 
-    private static final long serialVersionUID = -462161027450780784L;
-
     public void create() {
 	try {
 	    productService.add(product);

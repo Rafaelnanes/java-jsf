@@ -5,9 +5,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import rbn.edu.enums.PaymentEnum;
 import rbn.edu.model.Payment;
@@ -19,23 +18,22 @@ import rbn.edu.service.IUserService;
 
 @ManagedBean
 @ViewScoped
-public class PaymentBean extends AbstractBean {
+public class PaymentBean {
 
-    private static final long serialVersionUID = 7440880240191201437L;
-    @Autowired
+    @ManagedProperty(value = "#{paymentService}")
     private IPaymentService service;
-    @Autowired
+
+    @ManagedProperty(value = "#{userProductService}")
     private IUserProductService userProductService;
-    @Autowired
+
+    @ManagedProperty(value = "#{userService}")
     private IUserService userService;
 
     private List<PaymentEnum> paymentTypes = new ArrayList<PaymentEnum>();
     private Payment payment = new Payment();
 
-    @Override
     @PostConstruct
     protected void init() {
-	super.init();
 	payment.setUserProducts(new ArrayList<UserProduct>());
 	for (PaymentEnum type : PaymentEnum.values()) {
 	    paymentTypes.add(type);
@@ -63,6 +61,18 @@ public class PaymentBean extends AbstractBean {
 
     public void setPaymentTypes(List<PaymentEnum> paymentTypes) {
 	this.paymentTypes = paymentTypes;
+    }
+
+    public void setService(IPaymentService service) {
+	this.service = service;
+    }
+
+    public void setUserProductService(IUserProductService userProductService) {
+	this.userProductService = userProductService;
+    }
+
+    public void setUserService(IUserService userService) {
+	this.userService = userService;
     }
 
 }

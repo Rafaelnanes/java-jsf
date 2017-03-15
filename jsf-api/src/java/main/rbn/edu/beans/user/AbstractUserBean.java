@@ -2,29 +2,26 @@ package rbn.edu.beans.user;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 
-import rbn.edu.beans.AbstractBean;
 import rbn.edu.enums.UserAuthorizationType;
 import rbn.edu.model.User;
 import rbn.edu.model.UserLevel;
 import rbn.edu.service.IUserService;
 
-public abstract class AbstractUserBean extends AbstractBean {
+@ManagedBean
+public abstract class AbstractUserBean {
 
-    private static final long serialVersionUID = -1409446027935733058L;
-
-    @Autowired
+    @ManagedProperty(value = "#{userService}")
     protected IUserService userService;
 
     protected User user;
     protected UserAuthorizationType authorizationType = UserAuthorizationType.ROLE_VISITOR;
 
     public AbstractUserBean() {
-	super.init();
 	user = new User();
 	user.setEnabled(true);
-
     }
 
     protected void getBydId(long id) {
@@ -52,6 +49,10 @@ public abstract class AbstractUserBean extends AbstractBean {
 
     public void setAuthorizationType(UserAuthorizationType authorizationType) {
 	this.authorizationType = authorizationType;
+    }
+
+    public void setUserService(IUserService userService) {
+	this.userService = userService;
     }
 
 }

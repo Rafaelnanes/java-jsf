@@ -15,8 +15,6 @@ import rbn.edu.util.UtilJSF;
 @ViewScoped
 public class UserAddBean extends AbstractUserBean {
 
-    private static final long serialVersionUID = -5563557539843689988L;
-
     public void add() {
 	try {
 	    Set<UserLevel> level = new HashSet<UserLevel>();
